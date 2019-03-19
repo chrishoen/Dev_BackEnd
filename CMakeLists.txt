@@ -8,6 +8,7 @@ my_init_variables()
 my_init_import_variables()
 
 
+add_subdirectory ("BackEndDLL")
 add_subdirectory ("Test")
 return()
 
