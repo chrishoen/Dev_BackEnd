@@ -4,7 +4,7 @@ project (BackEndDLL CXX)
 
 my_find_src_files (src_files BackEndDLL)
 my_find_inc_files (inc_files)
-add_library (BackEndDLL STATIC ${src_files})
+add_library (BackEndDLL SHARED ${src_files})
 my_add_compile_options (BackEndDLL)
 my_add_pch (BackEndDLL)
 
