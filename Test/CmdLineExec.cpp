@@ -45,7 +45,8 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(0, "IsNumber %s", my_string_from_bool(aCmd->isArgNumber(1)));
+   Prn::print(Prn::View11, "TESTING11");
+   Prn::print(Prn::View21, "TESTING21");
 }
 
 //******************************************************************************

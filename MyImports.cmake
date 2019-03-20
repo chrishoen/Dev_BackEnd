@@ -20,7 +20,7 @@ function(my_init_import_variables)
       set (MySDL2_imageImportPath  "C:\\MyTools\\SDL2\\lib\\SDL2_image.lib" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
-      set (MyRisLibImportPath  "/usr/local/lib/libRisLib.a" PARENT_SCOPE)
+      set (MyRisLibImportPath  "/usr/local/lib/libRisLib.so" PARENT_SCOPE)
       set (MyDspLibIncludePath "/usr/local/include/DspLib" PARENT_SCOPE)
       set (MyDspLibImportPath  "/usr/local/lib/libDspLib.a" PARENT_SCOPE)
       set (MyCPrintLibIncludePath "/usr/local/include/CPrintLib" PARENT_SCOPE)
@@ -37,7 +37,7 @@ endfunction()
 
 function(my_lib_import_RisLib _target)
 
-   add_library(RisLib STATIC IMPORTED)
+   add_library(RisLib SHARED IMPORTED)
    set_target_properties(RisLib PROPERTIES IMPORTED_LOCATION ${MyRisLibImportPath})
 
    if (MSVC)

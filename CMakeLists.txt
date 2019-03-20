@@ -12,4 +12,8 @@ add_subdirectory ("BackEndDLL")
 add_subdirectory ("Test")
 return()
 
+add_subdirectory ("BackEndDLL")
+add_subdirectory ("Test")
+return()
+
 

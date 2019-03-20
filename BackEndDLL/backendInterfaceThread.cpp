@@ -24,8 +24,8 @@ InterfaceThread::InterfaceThread()
    BaseClass::setThreadPrintLevel(TS::PrintLevel(3, 3));
 
    // Set base class variables.
-   BaseClass::setThreadPriorityHigh();
-   BaseClass::mThreadSingleProcessor = 3;
+// BaseClass::setThreadPriorityHigh();
+// BaseClass::mThreadSingleProcessor = 3;
 
    // Set timer period
    BaseClass::mTimerPeriod = 1000;
