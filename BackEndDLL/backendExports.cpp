@@ -99,7 +99,7 @@ int DllExport getBackEndStatus()
 
 void DllExport setMyString(char* aString)
 {
-   Prn::print(Prn::View21, "MyString1 %s", aString);
+   Prn::print(Prn::View21, "setMyString %s", aString);
 }
 
 //******************************************************************************
@@ -109,6 +109,7 @@ void DllExport setMyString(char* aString)
 
 void DllExport getMyString(char* aString)
 {
+   Prn::print(Prn::View21, "getMyString");
    strcpy(aString, "ABCDEFGH");
 }
 
