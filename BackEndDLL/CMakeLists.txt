@@ -12,3 +12,10 @@ target_include_directories(BackEndDLL INTERFACE ${PROJECT_SOURCE_DIR})
 
 my_inc_import_RisLib(BackEndDLL)
 my_lib_import_RisLib(BackEndDLL)
+
+
+if (MSVC)
+   install(TARGETS BackEndDLL DESTINATION "C:\\aaa_cprint\\mono")
+else()
+   install(FILES "/var/tmp/Dev_BackEnd/build/BackEndDLL/libBackEndDLL.so" DESTINATION "/opt/cprint/mono")
+endif()
