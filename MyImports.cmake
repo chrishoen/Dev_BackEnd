@@ -37,7 +37,12 @@ endfunction()
 
 function(my_lib_import_RisLib _target)
 
-   add_library(RisLib SHARED IMPORTED)
+   if (MSVC)
+      add_library(RisLib STATIC IMPORTED)
+   else()
+      add_library(RisLib SHARED IMPORTED)
+   endif()
+
    set_target_properties(RisLib PROPERTIES IMPORTED_LOCATION ${MyRisLibImportPath})
 
    if (MSVC)
