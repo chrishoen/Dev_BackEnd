@@ -50,7 +50,7 @@ void InterfaceThread::executeOnTimer(int aTimeCount)
 {
    if (!mTPFlag) return;
    
-   Prn::print(Prn::View01, "TIMER %5d", aTimeCount);
+   Prn::print(Prn::View21, "TIMER %5d", aTimeCount);
 }
 
 //******************************************************************************

@@ -19,7 +19,7 @@ void main_initialize()
 
    // Initialize print facility
    Prn::resetPrint();
-   Prn::useConsole(1);
+   Prn::useConsole(2);
    Prn::initializePrint();
    
    // Initialize print filters
@@ -28,10 +28,10 @@ void main_initialize()
    Prn::setFilter(Prn::ThreadRun3,  true);
    Prn::setFilter(Prn::ThreadRun4,  true);
 
-   Prn::setFilter(Prn::View01, true, 1);
-   Prn::setFilter(Prn::View02, true, 1);
-   Prn::setFilter(Prn::View03, true, 1);
-   Prn::setFilter(Prn::View04, true, 1);
+   Prn::setFilter(Prn::View21, true, 2);
+   Prn::setFilter(Prn::View22, true, 2);
+   Prn::setFilter(Prn::View23, true, 2);
+   Prn::setFilter(Prn::View24, true, 2);
 
    Prn::print(0,"Test*******************************************BEGIN");
 
