@@ -33,7 +33,7 @@ void main_initialize()
    Prn::setFilter(Prn::View23, true, 2);
    Prn::setFilter(Prn::View24, true, 2);
 
-   Prn::print(0,"Test*******************************************BEGIN");
+   Prn::print(Prn::View21,"BackEndDLL****************************************BEGIN");
 
 }
 
@@ -44,7 +44,7 @@ void main_initialize()
 
 void main_finalize()
 {
-   Prn::print(0,"Test*******************************************END");
+   Prn::print(Prn::View21, "BackEndDLL****************************************END");
 
    // Close print
    Prn::finalizePrint();
