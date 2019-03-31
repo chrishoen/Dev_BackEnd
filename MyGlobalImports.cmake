@@ -2,7 +2,7 @@
 #*******************************************************************************
 #*******************************************************************************
 
-function(my_init_import_variables)
+function(my_init_global_import_variables)
 
    if(MSVC)
       set (MyRisLibIncludePath "C:\\MyTools\\MyLib\\include\\RisLib" PARENT_SCOPE)
@@ -18,6 +18,8 @@ function(my_init_import_variables)
       set (MySDL2ImportPath        "C:\\MyTools\\SDL2\\lib\\SDL2.lib" PARENT_SCOPE)
       set (MySDL2mainImportPath    "C:\\MyTools\\SDL2\\lib\\SDL2main.lib" PARENT_SCOPE)
       set (MySDL2_imageImportPath  "C:\\MyTools\\SDL2\\lib\\SDL2_image.lib" PARENT_SCOPE)
+      set (MyNodeIncludePath "C:\\MyTools\\Node\\sdk\\src" PARENT_SCOPE)
+      set (MyNodeImportPath  "C:\\MyTools\\Node\\sdk\\Release\\node.lib" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "/usr/local/lib/libRisLib.so" PARENT_SCOPE)
@@ -152,6 +154,25 @@ endfunction()
 function(my_inc_import_SDL2 _target)
 
    target_include_directories(${_target} PUBLIC ${MySDL2IncludePath})
+
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_lib_import_Node _target)
+
+   add_library(Node STATIC IMPORTED)
+   set_target_properties(Node PROPERTIES IMPORTED_LOCATION ${MyNodeImportPath})
+
+   target_link_libraries(${_target} Node)
+
+endfunction()
+
+function(my_inc_import_Node _target)
+
+   target_include_directories(${_target} PUBLIC ${MyNodeIncludePath})
 
 endfunction()
 
