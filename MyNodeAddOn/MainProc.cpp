@@ -1,25 +1,31 @@
 #include "stdafx.h"
 
+// hello.cc using N-API
 #include <node_api.h>
-#include <assert.h>
 
-napi_value Method(napi_env env, napi_callback_info info) {
-   napi_status status;
-   napi_value world;
-   status = napi_create_string_utf8(env, "world", 5, &world);
-   assert(status == napi_ok);
-   return world;
-}
+namespace demo {
 
-#define DECLARE_NAPI_METHOD(name, func)                          \
-  { name, 0, func, 0, 0, 0, napi_default, 0 }
+   napi_value Method(napi_env env, napi_callback_info args) {
+      napi_value greeting;
+      napi_status status;
 
-napi_value Init(napi_env env, napi_value exports) {
-   napi_status status;
-   napi_property_descriptor desc = DECLARE_NAPI_METHOD("hello", Method);
-   status = napi_define_properties(env, exports, 1, &desc);
-   assert(status == napi_ok);
-   return exports;
-}
+      status = napi_create_string_utf8(env, "world", NAPI_AUTO_LENGTH, &greeting);
+      if (status != napi_ok) return nullptr;
+      return greeting;
+   }
 
-NAPI_MODULE(NODE_GYP_MODULE_NAME, Init)
+   napi_value init(napi_env env, napi_value exports) {
+      napi_status status;
+      napi_value fn;
+
+      status = napi_create_function(env, nullptr, 0, Method, nullptr, &fn);
+      if (status != napi_ok) return nullptr;
+
+      status = napi_set_named_property(env, exports, "hello", fn);
+      if (status != napi_ok) return nullptr;
+      return exports;
+   }
+
+   NAPI_MODULE(NODE_GYP_MODULE_NAME, init)
+
+}  // namespace demo
