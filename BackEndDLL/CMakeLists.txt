@@ -15,7 +15,7 @@ my_lib_import_RisLib(BackEndDLL)
 
 
 if (MSVC)
-   install(TARGETS BackEndDLL DESTINATION "C:\\aaa_cprint\\mono")
+   install(TARGETS BackEndDLL DESTINATION "C:\\MyTools\\MyLib\\node")
 else()
    install(FILES "/var/tmp/Dev_BackEnd/build/BackEndDLL/libBackEndDLL.so" DESTINATION "/opt/mono")
 endif()

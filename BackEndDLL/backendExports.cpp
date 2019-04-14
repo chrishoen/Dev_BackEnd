@@ -15,6 +15,7 @@ namespace BackEnd
 // Regional variables.
 
 bool mValidFlag = false;
+int  mCount = 0;
 
 //******************************************************************************
 //******************************************************************************
@@ -111,6 +112,18 @@ void DllExport getMyString(char* aString)
 {
    Prn::print(Prn::View21, "getMyString");
    strcpy(aString, "ABCDEFGH");
+}
+
+int  DllExport getCount()
+{
+   Prn::print(Prn::View21, "getCount %d",mCount);
+   return mCount++;
+}
+
+void DllExport setCount(int aCount)
+{
+   mCount = aCount;
+   Prn::print(Prn::View21, "setCount %d", mCount);
 }
 
 //******************************************************************************

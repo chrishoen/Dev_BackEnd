@@ -7,7 +7,7 @@ include(MyGlobalImports.cmake)
 project ("Dev_BackEnd")
 my_init_global_import_variables()
 
-add_subdirectory ("MyNodeAddOn")
+add_subdirectory ("BackEndDLL")
 return()
 
 add_subdirectory ("BackEndDLL")
