@@ -30,6 +30,10 @@ function(my_init_global_import_variables)
       set (MyEigenIncludePath "/usr/include/eigen3" PARENT_SCOPE)
       set (MyOpenCVIncludePath "/usr/local/include/opencv4" PARENT_SCOPE)
       set (MySDL2IncludePath   "/usr/local/include/SDL2" PARENT_SCOPE)
+      set (MyGPIOIncludePath "/usr/local/include" PARENT_SCOPE)
+      set (MyGPIOImportPath  "/usr/local/lib/libwiringPi.so" PARENT_SCOPE)
+      set (MyNodeIncludePath "/usr/local/include/node" PARENT_SCOPE)
+      set (MyNodeImportPath  "/usr/local/lib/libnode.a" PARENT_SCOPE)
    endif()
 endfunction()
 
@@ -154,6 +158,30 @@ endfunction()
 function(my_inc_import_SDL2 _target)
 
    target_include_directories(${_target} PUBLIC ${MySDL2IncludePath})
+
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_lib_import_GPIO _target)
+
+   if(MSVC)
+   else()
+      add_library(wiringPi SHARED IMPORTED)
+      set_target_properties(wiringPi PROPERTIES IMPORTED_LOCATION ${MyGPIOImportPath})
+      target_link_libraries(${_target} wiringPi)
+   endif()
+
+endfunction()
+
+function(my_inc_import_GPIO _target)
+
+   if(MSVC)
+   else()
+      target_include_directories(${_target} PUBLIC ${MyGPIOIncludePath})
+   endif()
 
 endfunction()
 
