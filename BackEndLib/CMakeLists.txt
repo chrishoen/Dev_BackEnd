@@ -10,6 +10,10 @@ my_add_pch (BackEndLib)
 
 target_include_directories(BackEndLib INTERFACE ${PROJECT_SOURCE_DIR})
 
+my_inc_import_RisLib(BackEndLib)
+my_lib_import_RisLib(BackEndLib)
+
+
 if (MSVC)
    install(TARGETS BackEndLib DESTINATION "C:\\MyTools\\MyLib\\node")
    install(FILES backendExports.h DESTINATION "C:\\MyTools\\MyLib\\node")
