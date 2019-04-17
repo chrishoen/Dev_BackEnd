@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include "backendExports.h"
 #include "risProgramTime.h"
 #include "CmdLineExec.h"
 
@@ -47,6 +48,7 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
    Prn::print(Prn::View11, "TESTING11");
    Prn::print(Prn::View21, "TESTING21");
+   Prn::print(0, "test %d",BackEnd::getCount());
 }
 
 //******************************************************************************

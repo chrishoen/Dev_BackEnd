@@ -1,6 +1,6 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "stdafx.h"
-
+#if 0
 #include <windows.h>
 
 
@@ -20,3 +20,4 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
+#endif

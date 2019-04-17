@@ -8,6 +8,9 @@ my_add_pch (Test)
 
 my_inc_import_RisLib(Test)
 my_lib_import_RisLib(Test)
+
+my_inc_import_BackEndLib(Test)
+my_lib_import_BackEndLib(Test)
 return()
 
 

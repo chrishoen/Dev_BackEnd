@@ -22,6 +22,8 @@ function(my_init_global_import_variables)
      #set (MyNodeImportPath  "C:\\MyTools\\Node\\sdk\\Release\\node.lib" PARENT_SCOPE)
       set (MyNodeIncludePath "C:\\MyTools\\node_10_2\\include" PARENT_SCOPE)
       set (MyNodeImportPath  "C:\\MyTools\\node_10_2\\node.lib" PARENT_SCOPE)
+      set (MyBackEndLibIncludePath "C:\\MyTools\\MyLib\\node" PARENT_SCOPE)
+      set (MyBackEndLibImportPath  "C:\\MyTools\\MyLib\\node\\BackEndLib.lib" PARENT_SCOPE)
    else()
       set (MyRisLibIncludePath "/usr/local/include/RisLib" PARENT_SCOPE)
       set (MyRisLibImportPath  "/usr/local/lib/libRisLib.so" PARENT_SCOPE)
@@ -203,6 +205,25 @@ endfunction()
 function(my_inc_import_Node _target)
 
    target_include_directories(${_target} PUBLIC ${MyNodeIncludePath})
+
+endfunction()
+
+#*******************************************************************************
+#*******************************************************************************
+#*******************************************************************************
+
+function(my_lib_import_BackEndLib _target)
+
+   add_library(ExtraBackEndLib STATIC IMPORTED)
+   set_target_properties(ExtraBackEndLib PROPERTIES IMPORTED_LOCATION ${MyBackEndLibImportPath})
+
+   target_link_libraries(${_target} ExtraBackEndLib)
+
+endfunction()
+
+function(my_inc_import_BackEndLib _target)
+
+   target_include_directories(${_target} PUBLIC ${MyBackEndLibIncludePath})
 
 endfunction()
 
