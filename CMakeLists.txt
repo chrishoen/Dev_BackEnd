@@ -9,7 +9,6 @@ project ("Dev_BackEnd")
 my_init_global_import_variables()
 
 add_subdirectory ("BackEndLib")
-add_subdirectory ("Test")
 return()
 
 add_subdirectory ("BackEndLib")
