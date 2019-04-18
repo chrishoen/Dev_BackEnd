@@ -4,7 +4,7 @@ project (BackEndLib CXX)
 
 my_find_src_files (src_files BackEndLib)
 my_find_inc_files (inc_files)
-add_library (BackEndLib SHARED ${src_files})
+add_library (BackEndLib STATIC ${src_files})
 my_add_compile_options (BackEndLib)
 my_add_pch (BackEndLib)
 

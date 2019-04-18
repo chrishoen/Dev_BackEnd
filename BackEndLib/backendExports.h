@@ -60,6 +60,7 @@ void  getMyString(char* aString);
 
 int   getCount();
 void  setCount(int aCount);
+void  sleep(int aTicks);
 
 
 //******************************************************************************
