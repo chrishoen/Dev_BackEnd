@@ -58,6 +58,16 @@ void InterfaceThread::threadExitFunction()
 //******************************************************************************
 //******************************************************************************
 
+void InterfaceThread::shutdownThread()
+{
+   mTimerCallbackFlag = false;
+   BaseClass::shutdownThread();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void InterfaceThread::setTimerCallback(std::function<void(int)> aFunction)
 {
    mTimerCallback = aFunction;

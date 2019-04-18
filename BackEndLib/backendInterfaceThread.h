@@ -44,6 +44,7 @@ public:
    // Base class overloads.
    void threadInitFunction() override;
    void threadExitFunction() override;
+   void shutdownThread() override;
    void executeOnTimer(int aTimeCount) override;
 
    //******************************************************************************
