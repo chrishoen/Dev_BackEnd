@@ -114,7 +114,7 @@ void getMyString(char* aString)
    strcpy(aString, "ABCDEFGH");
 }
 
-int mgetCount()
+int getCount()
 {
    Prn::print(Prn::View21, "getCount %d",mCount);
    return mCount++;
