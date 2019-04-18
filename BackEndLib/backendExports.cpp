@@ -108,19 +108,19 @@ void  setMyString(char* aString)
 //******************************************************************************
 // Set a string.
 
-void  getMyString(char* aString)
+void getMyString(char* aString)
 {
    Prn::print(Prn::View21, "getMyString");
    strcpy(aString, "ABCDEFGH");
 }
 
-int   getCount()
+int mgetCount()
 {
    Prn::print(Prn::View21, "getCount %d",mCount);
    return mCount++;
 }
 
-void  setCount(int aCount)
+void setCount(int aCount)
 {
    mCount = aCount;
    Prn::print(Prn::View21, "setCount %d", mCount);
@@ -129,6 +129,21 @@ void  setCount(int aCount)
 void sleep(int aTicks)
 {
    Ris::Threads::threadSleep(aTicks);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Register a callback for the timer.
+
+void setTimerCallback(std::function<void(int)> aFunction)
+{
+   gInterfaceThread->setTimerCallback(aFunction);
+}
+
+void resetTimerCallback()
+{
+   gInterfaceThread->resetTimerCallback();
 }
 
 //******************************************************************************
