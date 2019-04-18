@@ -8,11 +8,7 @@ include(MyGlobalImports.cmake)
 project ("Dev_BackEnd")
 my_init_global_import_variables()
 
-add_subdirectory ("BackEndLib")
-return()
-
-add_subdirectory ("BackEndLib")
-add_subdirectory ("Test")
+add_subdirectory ("BackEndDLL")
 return()
 
 add_subdirectory ("BackEndDLL")

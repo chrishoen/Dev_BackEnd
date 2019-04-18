@@ -32,6 +32,8 @@ InterfaceThread::InterfaceThread()
 
    // Members
    mTPFlag = true;
+   mTimerCallbackFlag = false;
+
 }
 
 //******************************************************************************
@@ -56,11 +58,42 @@ void InterfaceThread::threadExitFunction()
 //******************************************************************************
 //******************************************************************************
 
+void InterfaceThread::shutdownThread()
+{
+   mTimerCallbackFlag = false;
+   BaseClass::shutdownThread();
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void InterfaceThread::setTimerCallback(std::function<void(int)> aFunction)
+{
+   mTimerCallback = aFunction;
+   mTimerCallbackFlag = true;
+}
+
+void InterfaceThread::resetTimerCallback()
+{
+   mTimerCallbackFlag = false;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void InterfaceThread::executeOnTimer(int aTimeCount)
 {
    if (!mTPFlag) return;
    
    Prn::print(Prn::View21, "TIMER %5d", aTimeCount);
+
+   // If the timer callback is valid then call it.
+   if (mTimerCallbackFlag)
+   {
+      mTimerCallback(aTimeCount);
+   }
 }
 
 //******************************************************************************

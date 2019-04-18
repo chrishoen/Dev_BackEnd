@@ -34,7 +34,7 @@ int  mCount = 0;
 // input section. This allows having default settings with overrides
 // for some specific variables.
 
-bool DllExport initializeBackEnd()
+bool  initializeBackEnd()
 {
    // If already ininialized then exit.
    if (mValidFlag) return false;
@@ -61,7 +61,7 @@ bool DllExport initializeBackEnd()
 // must be called before the process termination section force
 // terminates any running threads. Return true if successful.
 
-bool DllExport finalizeBackEnd()
+bool  finalizeBackEnd()
 {
    // Guard.
    if (!mValidFlag) return false;
@@ -85,7 +85,7 @@ bool DllExport finalizeBackEnd()
 // is filled with the current status. The record must first be
 // created by the caller. 
 
-int DllExport getBackEndStatus()
+int  getBackEndStatus()
 {
    // Guard.
    if (!mValidFlag) return -1;
@@ -98,7 +98,7 @@ int DllExport getBackEndStatus()
 //******************************************************************************
 // Set a string.
 
-void DllExport setMyString(char* aString)
+void  setMyString(char* aString)
 {
    Prn::print(Prn::View21, "setMyString %s", aString);
 }
@@ -108,22 +108,42 @@ void DllExport setMyString(char* aString)
 //******************************************************************************
 // Set a string.
 
-void DllExport getMyString(char* aString)
+void getMyString(char* aString)
 {
    Prn::print(Prn::View21, "getMyString");
    strcpy(aString, "ABCDEFGH");
 }
 
-int  DllExport getCount()
+int getCount()
 {
    Prn::print(Prn::View21, "getCount %d",mCount);
    return mCount++;
 }
 
-void DllExport setCount(int aCount)
+void setCount(int aCount)
 {
    mCount = aCount;
    Prn::print(Prn::View21, "setCount %d", mCount);
+}
+
+void sleep(int aTicks)
+{
+   Ris::Threads::threadSleep(aTicks);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Register a callback for the timer.
+
+void setTimerCallback(std::function<void(int)> aFunction)
+{
+   gInterfaceThread->setTimerCallback(aFunction);
+}
+
+void resetTimerCallback()
+{
+   gInterfaceThread->resetTimerCallback();
 }
 
 //******************************************************************************
