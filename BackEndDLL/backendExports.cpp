@@ -96,23 +96,29 @@ int  getBackEndStatus()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Set a string.
+// Set a string. Delete the string after processing it.
 
-void  setMyString(char* aString)
+void setMyString(std::string* aString)
 {
-   Prn::print(Prn::View21, "setMyString %s", aString);
+   Prn::print(Prn::View21, "setMyString %s", aString->c_str());
+   delete aString;
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Set a string.
+// Create a new string and return it. The caller must delete it after
+// processing it.
 
-void getMyString(char* aString)
+void getMyString(std::string*& aString)
 {
-   Prn::print(Prn::View21, "getMyString");
-   strcpy(aString, "ABCDEFGH");
+   aString = new std::string("My New String");
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Counters.
 
 int getCount()
 {

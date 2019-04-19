@@ -1,7 +1,6 @@
 #include "stdafx.h"
 
 #include "backendExports.h"
-#include "risProgramTime.h"
 #include "CmdLineExec.h"
 
 //******************************************************************************
@@ -46,8 +45,6 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(Prn::View11, "TESTING11");
-   Prn::print(Prn::View21, "TESTING21");
    Prn::print(0, "test %d",BackEnd::getCount());
 }
 
@@ -57,8 +54,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   double tTime = Ris::getCurrentProgramTime();
-   Prn::print(0, "time %10.4f", tTime);
 }
 
 //******************************************************************************
@@ -67,15 +62,6 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   char tString[200];
-
-   while (true)
-   {
-      fgets(tString, 200, stdin);
-      printf("CMD %d %s", (int)strlen(tString), tString);
-      if (strcmp(tString, "e\n") == 0) break;
-   }
-
 }
 
 //******************************************************************************
