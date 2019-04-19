@@ -27,12 +27,15 @@ void CmdLineExec::reset()
 
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
-   if(aCmd->isCmd("RESET"  ))  reset();
-   if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
-   if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3(aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4(aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5(aCmd);
+   if(aCmd->isCmd("RESET"))  reset();
+
+   if (aCmd->isCmd("GO1"))  executeGo1(aCmd);
+   if (aCmd->isCmd("GO2"))  executeGo2(aCmd);
+   if (aCmd->isCmd("GO3"))  executeGo3(aCmd);
+   if (aCmd->isCmd("GO4"))  executeGo4(aCmd);
+   if (aCmd->isCmd("GO5"))  executeGo5(aCmd);
+
+   if (aCmd->isCmd("Timer"))   executeTimer(aCmd);
 }
 
 //******************************************************************************
@@ -43,9 +46,32 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
+void myTimerCallback(int aCount)
+{
+   Prn::print(Prn::View01, "myTimerCallbackTimer %d", aCount);
+}
+
+void CmdLineExec::executeTimer(Ris::CmdLineCmd* aCmd)
+{
+   aCmd->setArgDefault(1, true);
+
+   if (aCmd->argBool(1))
+   {
+      BackEnd::setTimerCallback(myTimerCallback);
+   }
+   else
+   {
+      BackEnd::resetTimerCallback();
+   }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(0, "test %d",BackEnd::getCount());
+   Prn::print(0, "test %d", BackEnd::getCount());
 }
 
 //******************************************************************************

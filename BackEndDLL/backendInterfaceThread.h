@@ -1,7 +1,7 @@
 #pragma once
 
 /*==============================================================================
-Timer thead example
+Prototype tcp server thread message thread.
 ==============================================================================*/
 
 //******************************************************************************
@@ -9,65 +9,89 @@ Timer thead example
 //******************************************************************************
 #include <functional>
 
-#include "risThreadsTimerThread.h"
+#include "risThreadsQCallThread.h"
 
 namespace BackEnd
 {
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
 
-class InterfaceThread : public Ris::Threads::BaseTimerThread
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// This is an example backend interface thread.
+// 
+// It inherits from BaseQCallThread to obtain a call queue based thread
+// functionality.
+
+class InterfaceThread : public Ris::Threads::BaseQCallThread
 {
 public:
-   typedef Ris::Threads::BaseTimerThread BaseClass;
+   typedef Ris::Threads::BaseQCallThread BaseClass;
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Members.
 
+   // Timer flag.
    bool mTPFlag;
 
    // Timer callback.
    bool mTimerCallbackFlag;
-   std::function<void(int)> mTimerCallback;
+   typedef std::function<void(int)> TimerCallback_T;
+   TimerCallback_T mTimerCallback;
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Methods.
 
    // Constructor.
    InterfaceThread();
+   ~InterfaceThread();
 
-   // Base class overloads.
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Thread base class overloads:
+
+   // Thread init function. This is called by the base class immediately 
+   // after the thread starts running. It starts the child thread.
    void threadInitFunction() override;
+
+   // Thread exit function. This is called by the base class immediately
+   // before the thread is terminated. It shuts down the child thread.
    void threadExitFunction() override;
-   void shutdownThread() override;
-   void executeOnTimer(int aTimeCount) override;
 
-   //******************************************************************************
-   //******************************************************************************
-   //******************************************************************************
-   // Methods.
+   // Execute periodically. This is called by the base class timer. It
+   // sends an echo request message.
+   void executeOnTimer(int aTimerCount) override;
 
-   void setTimerCallback(std::function<void(int)> aFunction);
-   void resetTimerCallback();
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Set timer callback.
+
+   // qcall to set the timer callback.
+   Ris::Threads::QCall1<TimerCallback_T> mSetTimerCallbackQCall;
+
+   // Set the timer calllback. This is bound to the qcall.
+   void executeSetTimerCallback(TimerCallback_T aCallback);
+
 };
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Global instance
+// Global singular instance.
 
 #ifdef _BACKENDINTERFACETHREAD_CPP_
-          InterfaceThread* gInterfaceThread;
+         InterfaceThread* gInterfaceThread;
 #else
-   extern InterfaceThread* gInterfaceThread;
+extern   InterfaceThread* gInterfaceThread;
 #endif
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
 }//namespace
+

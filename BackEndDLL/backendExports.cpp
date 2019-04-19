@@ -144,12 +144,13 @@ void sleep(int aTicks)
 
 void setTimerCallback(std::function<void(int)> aFunction)
 {
-   gInterfaceThread->setTimerCallback(aFunction);
+   gInterfaceThread->mSetTimerCallbackQCall(aFunction);
 }
 
 void resetTimerCallback()
 {
-   gInterfaceThread->resetTimerCallback();
+   std::function<void(int)> tEmptyCallback;
+   gInterfaceThread->mSetTimerCallbackQCall(tEmptyCallback);
 }
 
 //******************************************************************************
