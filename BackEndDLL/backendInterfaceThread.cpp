@@ -32,6 +32,7 @@ InterfaceThread::InterfaceThread()
    // Members
    mTPFlag = true;
    mCommand1CountZero = 0;
+   mCommand2CountZero = 0;
 }
 
 InterfaceThread::~InterfaceThread()
@@ -77,7 +78,7 @@ void InterfaceThread::executeSetTimerCallback(TimerCallback_T aCallback)
 //******************************************************************************
 // Execute command1. This is bound to the qcall.
 
-void InterfaceThread::executeCommand1(std::string* aArg0, Command1Callback_T aCompletionCallback)
+void InterfaceThread::executeCommand1(std::string* aArg0, Command1CompletionCallback_T aCompletionCallback)
 {
    Prn::print(Prn::View21, "Execute Command1 %s", aArg0);
 
@@ -87,8 +88,12 @@ void InterfaceThread::executeCommand1(std::string* aArg0, Command1Callback_T aCo
       aCompletionCallback(666, new std::string("command2_already_running"));
       return;
    }
+
    // Store the callback.
-   mCommand1Callback = aCompletionCallback;
+   mCommand1CompletionCallback = aCompletionCallback;
+
+   // Acknowledege the command.
+   mCommand1CompletionCallback(101, new std::string("command1_ack"));
 
    // Execute the command.
    mCommand1CountZero = 4;
@@ -122,6 +127,9 @@ void InterfaceThread::executeCommand2(
    mCommand2CompletionCallback = aCompletionCallback;
    mCommand2ProgressCallback = aProgressCallback;
 
+   // Acknowledege the command.
+   mCommand2CompletionCallback(201, new std::string("command2_ack"));
+
    // Execute the command.
    mCommand2CountZero = 10;
 
@@ -154,7 +162,7 @@ void InterfaceThread::executeOnTimer(int aTimerCount)
       if (--mCommand1CountZero == 0)
       {
          // Call the completion callback.
-         mCommand1Callback(101, new std::string("command1_completion"));
+         mCommand1CompletionCallback(102, new std::string("command1_completion"));
       }
    }
 
@@ -168,7 +176,7 @@ void InterfaceThread::executeOnTimer(int aTimerCount)
       if (--mCommand2CountZero == 0)
       {
          // Call the completion callback.
-         mCommand2CompletionCallback(201, new std::string("command2_completion"));
+         mCommand2CompletionCallback(202, new std::string("command2_completion"));
       }
    }
 }

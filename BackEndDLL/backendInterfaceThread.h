@@ -41,8 +41,8 @@ public:
 
    // Command1 callback.
    int  mCommand1CountZero;
-   typedef std::function<void(int,std::string*)> Command1Callback_T;
-   Command1Callback_T mCommand1Callback;
+   typedef std::function<void(int,std::string*)> Command1CompletionCallback_T;
+   Command1CompletionCallback_T mCommand1CompletionCallback;
 
    // Command2 callback.
    int  mCommand2CountZero;
@@ -96,13 +96,13 @@ public:
    // qcall to execute the command.
    Ris::Threads::QCall2<
       std::string*,
-      Command1Callback_T> mCommand1QCall;
+      Command1CompletionCallback_T> mCommand1QCall;
 
    // Execute the command. This is bound to the qcall.
    // Execute the command and call the callback upon completion.
    void executeCommand1(
       std::string* aArg0,
-      Command1Callback_T aCompletionCallback);
+      Command1CompletionCallback_T aCompletionCallback);
 
    //***************************************************************************
    //***************************************************************************
