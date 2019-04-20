@@ -61,6 +61,7 @@ public:
 
    void executeTimer(Ris::CmdLineCmd* aCmd);
    void executeCommand1(Ris::CmdLineCmd* aCmd);
+   void executeCommand2(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

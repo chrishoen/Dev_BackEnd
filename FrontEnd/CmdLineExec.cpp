@@ -37,6 +37,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("Timer"))   executeTimer(aCmd);
    if (aCmd->isCmd("cmd1"))    executeCommand1(aCmd);
+   if (aCmd->isCmd("cmd2"))    executeCommand2(aCmd);
 }
 
 //******************************************************************************
@@ -79,6 +80,27 @@ void myCommand1Callback(int aCompletionCode,std::string* aCompletionString)
 void CmdLineExec::executeCommand1(Ris::CmdLineCmd* aCmd)
 {
    BackEnd::doCommand1(new std::string("arg0"),myCommand1Callback);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void myCommand2CompletionCallback(int aCompletionCode, std::string* aCompletionString)
+{
+   Prn::print(Prn::View01, "myCommand2CompletionCallback %d %s", aCompletionCode, aCompletionString->c_str());
+   delete aCompletionString;
+}
+
+void myCommand2ProgressCallback(std::string* aProgressString)
+{
+   Prn::print(Prn::View01, "myCommand2ProgressCallback %s", aProgressString->c_str());
+   delete aProgressString;
+}
+
+void CmdLineExec::executeCommand2(Ris::CmdLineCmd* aCmd)
+{
+   BackEnd::doCommand2(new std::string("arg0"), myCommand2CompletionCallback, myCommand2ProgressCallback);
 }
 
 //******************************************************************************

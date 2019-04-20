@@ -44,6 +44,13 @@ public:
    typedef std::function<void(int,std::string*)> Command1Callback_T;
    Command1Callback_T mCommand1Callback;
 
+   // Command2 callback.
+   int  mCommand2CountZero;
+   typedef std::function<void(int, std::string*)> Command2CompletionCallback_T;
+   Command2CompletionCallback_T mCommand2CompletionCallback;
+   typedef std::function<void(std::string*)> Command2ProgressCallback_T;
+   Command2ProgressCallback_T mCommand2ProgressCallback;
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -84,13 +91,37 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods. Set timer callback.
+   // Methods. Command1.
 
-   // qcall to set the timer callback.
-   Ris::Threads::QCall2<std::string*,Command1Callback_T> mCommand1QCall;
+   // qcall to execute the command.
+   Ris::Threads::QCall2<
+      std::string*,
+      Command1Callback_T> mCommand1QCall;
 
-   // Set the timer calllback. This is bound to the qcall.
-   void executeCommand1(std::string* aArg0,Command1Callback_T aCallback);
+   // Execute the command. This is bound to the qcall.
+   // Execute the command and call the callback upon completion.
+   void executeCommand1(
+      std::string* aArg0,
+      Command1Callback_T aCompletionCallback);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Command2.
+
+   // qcall to execute the command.
+   Ris::Threads::QCall3<
+      std::string*, 
+      Command2CompletionCallback_T, 
+      Command2ProgressCallback_T> mCommand2QCall;
+
+   // Execute the command. This is bound to the qcall.
+   // Execute the command and call the callback upon completion.
+   // Periodically call the progress callback until completion.
+   void executeCommand2(
+      std::string* aArg0, 
+      Command2CompletionCallback_T aCompletionCallback,
+      Command2ProgressCallback_T aProgressCallback);
 };
 
 //******************************************************************************

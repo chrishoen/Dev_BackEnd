@@ -166,4 +166,17 @@ void doCommand1(std::string* aArg0, std::function<void(int, std::string*)> aComp
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Invoke command2.
+
+void doCommand2(
+   std::string* aArg0,
+   std::function<void(int, std::string*)> aCompletionCallback,
+   std::function<void(std::string*)> aProgressCallback)
+{
+   gInterfaceThread->mCommand2QCall(aArg0, aCompletionCallback,aProgressCallback);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 }//namespace

@@ -80,7 +80,19 @@ void resetTimerCallback();
 //******************************************************************************
 // Invoke command1.
 
-void doCommand1(std::string* aArg0,std::function<void(int,std::string*)> aCompletionCallback);
+void doCommand1(
+   std::string* aArg0,
+   std::function<void(int,std::string*)> aCompletionCallback);
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Invoke command2.
+
+void doCommand2(
+   std::string* aArg0,
+   std::function<void(int, std::string*)> aCompletionCallback,
+   std::function<void(std::string*)> aProgressCallback);
 
 //******************************************************************************
 //******************************************************************************
