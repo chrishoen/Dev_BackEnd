@@ -60,6 +60,7 @@ public:
    void executeGo5(Ris::CmdLineCmd* aCmd);
 
    void executeTimer(Ris::CmdLineCmd* aCmd);
+   void executeCommand1(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

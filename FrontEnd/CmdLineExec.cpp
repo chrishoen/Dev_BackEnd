@@ -36,6 +36,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("GO5"))  executeGo5(aCmd);
 
    if (aCmd->isCmd("Timer"))   executeTimer(aCmd);
+   if (aCmd->isCmd("cmd1"))    executeCommand1(aCmd);
 }
 
 //******************************************************************************
@@ -48,7 +49,7 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void myTimerCallback(int aCount)
 {
-   Prn::print(Prn::View01, "myTimerCallbackTimer %d", aCount);
+   Prn::print(Prn::View01, "myTimerCallback %d", aCount);
 }
 
 void CmdLineExec::executeTimer(Ris::CmdLineCmd* aCmd)
@@ -63,6 +64,21 @@ void CmdLineExec::executeTimer(Ris::CmdLineCmd* aCmd)
    {
       BackEnd::resetTimerCallback();
    }
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void myCommand1Callback(int aCompletionCode,std::string* aCompletionString)
+{
+   Prn::print(Prn::View01, "myCommand1Callback %d %s", aCompletionCode, aCompletionString->c_str());
+   delete aCompletionString;
+}
+
+void CmdLineExec::executeCommand1(Ris::CmdLineCmd* aCmd)
+{
+   BackEnd::doCommand1(new std::string("arg0"),myCommand1Callback);
 }
 
 //******************************************************************************

@@ -36,9 +36,13 @@ public:
    bool mTPFlag;
 
    // Timer callback.
-   bool mTimerCallbackFlag;
    typedef std::function<void(int)> TimerCallback_T;
    TimerCallback_T mTimerCallback;
+
+   // Command1 callback.
+   int  mCommand1CountZero;
+   typedef std::function<void(int,std::string*)> Command1Callback_T;
+   Command1Callback_T mCommand1Callback;
 
    //***************************************************************************
    //***************************************************************************
@@ -77,6 +81,16 @@ public:
    // Set the timer calllback. This is bound to the qcall.
    void executeSetTimerCallback(TimerCallback_T aCallback);
 
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Set timer callback.
+
+   // qcall to set the timer callback.
+   Ris::Threads::QCall2<std::string*,Command1Callback_T> mCommand1QCall;
+
+   // Set the timer calllback. This is bound to the qcall.
+   void executeCommand1(std::string* aArg0,Command1Callback_T aCallback);
 };
 
 //******************************************************************************

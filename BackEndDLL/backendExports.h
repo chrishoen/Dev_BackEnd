@@ -72,8 +72,15 @@ void sleep(int aTicks);
 //******************************************************************************
 // Register a callback for the timer.
 
-void setTimerCallback(std::function<void(int)> aFunction);
+void setTimerCallback(std::function<void(int)> aCallback);
 void resetTimerCallback();
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Invoke command1.
+
+void doCommand1(std::string* aArg0,std::function<void(int,std::string*)> aCompletionCallback);
 
 //******************************************************************************
 //******************************************************************************

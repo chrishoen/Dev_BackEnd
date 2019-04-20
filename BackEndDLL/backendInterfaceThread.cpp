@@ -26,10 +26,11 @@ InterfaceThread::InterfaceThread()
 
    // Initialize qcalls.
    mSetTimerCallbackQCall.bind(this, &InterfaceThread::executeSetTimerCallback);
+   mCommand1QCall.bind(this, &InterfaceThread::executeCommand1);
 
    // Members
    mTPFlag = true;
-   mTimerCallbackFlag = false;
+   mCommand1CountZero = 0;
 }
 
 InterfaceThread::~InterfaceThread()
@@ -66,16 +67,27 @@ void  InterfaceThread::threadExitFunction()
 // Set the timer calllback. This is bound to the qcall.
 void InterfaceThread::executeSetTimerCallback(TimerCallback_T aCallback)
 {     
-   if (aCallback)
-   {
-      mTimerCallback = aCallback;
-      mTimerCallbackFlag = true;
-   }
-   else
-   {
-      mTimerCallback = aCallback;
-      mTimerCallbackFlag = false;
-   }
+   // Store the callback.
+   mTimerCallback = aCallback;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Execute command1. This is bound to the qcall.
+
+void InterfaceThread::executeCommand1(std::string* aArg0, Command1Callback_T aCallback)
+{
+   Prn::print(Prn::View21, "Execute Command1 %s", aArg0);
+
+   // Store the callback.
+   mCommand1Callback = aCallback;
+
+   // Execute the command.
+   mCommand1CountZero = 4;
+
+   // Done.
+   delete aArg0;
 }
 
 //******************************************************************************
@@ -94,6 +106,17 @@ void InterfaceThread::executeOnTimer(int aTimerCount)
    if (mTimerCallback)
    {
       mTimerCallback(aTimerCount);
+   }
+
+   // Execute command1.
+   if (mCommand1CountZero)
+   {
+      // Decrement the count to zero.
+      if (--mCommand1CountZero == 0)
+      {
+         // Call the completion callback.
+         mCommand1Callback(101, new std::string("command1_completion"));
+      }
    }
 }
 
