@@ -170,7 +170,9 @@ void InterfaceThread::executeOnTimer(int aTimerCount)
    if (mCommand2CountZero)
    {
       // Call the progress callback.
-      mCommand2ProgressCallback(new std::string("command2_progress"));
+      char tString[100];
+      sprintf(tString, "command2_progress %d", mCommand2CountZero);
+      mCommand2ProgressCallback(new std::string(tString));
 
       // Decrement the count to zero.
       if (--mCommand2CountZero == 0)
