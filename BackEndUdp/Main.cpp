@@ -7,6 +7,7 @@
 
 #include "tsPrintThread.h"
 #include "backendStatusThread.h"
+#include "backendCommandThread.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -29,6 +30,9 @@ int main(int argc,char** argv)
    BackEnd::gStatusThread = new BackEnd::StatusThread;
    BackEnd::gStatusThread->launchThread();
 
+   BackEnd::gCommandThread = new BackEnd::CommandThread;
+   BackEnd::gCommandThread->launchThread();
+
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
@@ -37,6 +41,7 @@ int main(int argc,char** argv)
    Ris::Threads::showCurrentThreadInfo();
    TS::gPrintThread->showThreadInfo();
    BackEnd::gStatusThread->showThreadInfo();
+   BackEnd::gCommandThread->showThreadInfo();
 
    //***************************************************************************
    //***************************************************************************
@@ -53,8 +58,12 @@ int main(int argc,char** argv)
    // Shutdown program Threads.
 
    BackEnd::gStatusThread->shutdownThread();
+   BackEnd::gCommandThread->shutdownThread();
 
    delete BackEnd::gStatusThread;
+   delete BackEnd::gCommandThread;
+   BackEnd::gStatusThread = 0;
+   BackEnd::gCommandThread = 0;
 
    //***************************************************************************
    //***************************************************************************

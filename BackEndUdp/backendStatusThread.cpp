@@ -90,7 +90,7 @@ void StatusThread::showThreadInfo()
 
 void StatusThread::executeOnTimer(int aCount)
 {
-   Prn::print(Prn::View21, "TIMER %5d", aCount);
+   Prn::print(Prn::View21, "STATUS TIMER %5d", aCount);
 
    // Send.
    char tString[200];

@@ -23,7 +23,7 @@ namespace BackEnd
 CommandThread::CommandThread()
 {
    // Set base class thread variables.
-   BaseClass::setThreadName("Status");
+   BaseClass::setThreadName("Command");
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mNormal);
    BaseClass::setThreadPrintLevel(gSettings.mStatusPrintLevel);
    BaseClass::mTimerPeriod = 1000;
