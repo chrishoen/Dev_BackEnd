@@ -78,9 +78,12 @@ public:
    TS::PrintLevel mStatusUdpPrintLevel;
 
    // Status and command udp ports.
-   int mCommandPort;
-   int mCompletionPort;
-   int mStatusPort;
+   char mBackEndIpAddress[cMaxStringSize];
+   char mFrontEndIpAddress[cMaxStringSize];
+
+   int mCommandInputPort;
+   int mCommandOutputPort;
+   int mStatusOutputPort;
 
    //***************************************************************************
    //***************************************************************************

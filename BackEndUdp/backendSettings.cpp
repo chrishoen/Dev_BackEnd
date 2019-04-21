@@ -34,9 +34,11 @@ void Settings::reset()
    BaseClass::reset();
    BaseClass::setFileName_RelAlphaFiles("/BackEnd/BackEnd_Settings.txt");
 
-   mCommandPort = 0;
-   mCompletionPort = 0;
-   mStatusPort = 0;
+   mBackEndIpAddress[0];
+   mFrontEndIpAddress[0];
+   mCommandInputPort = 0;
+   mCommandOutputPort = 0;
+   mStatusOutputPort = 0;
 }
 
 //******************************************************************************
@@ -48,7 +50,14 @@ void Settings::show()
 {
    char tBuffer[40];
    printf("\n");
-   printf("Settings************************************************ %s\n", mTargetSection);
+   printf("BackEnd Settings***************************************** %s\n", mTargetSection);
+
+   printf("\n");
+   printf("BackEndIpAddress           %10s\n", mBackEndIpAddress);
+   printf("FrontEndIpAddress          %10s\n", mFrontEndIpAddress);
+   printf("CommandInputPort           %10d\n", mCommandInputPort);
+   printf("CommandOutputPort          %10d\n", mCommandOutputPort);
+   printf("StatusOutputPort           %10d\n", mStatusOutputPort);
 
    printf("\n");
    printf("CommandPrintLevel          %-10s\n", mCommandPrintLevel.asString(tBuffer));
@@ -56,9 +65,6 @@ void Settings::show()
    printf("StatusPrintLevel           %-10s\n", mStatusPrintLevel.asString(tBuffer));
    printf("StatusUdpPrintLevel        %-10s\n", mStatusUdpPrintLevel.asString(tBuffer));
 
-   printf("\n");
-   printf("CommandPort                %10d\n", mCommandPort);
-   printf("StatusPort                 %10d\n", mStatusPort);
 }
 
 //******************************************************************************
@@ -72,8 +78,13 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
-   if (aCmd->isCmd("CommandPort"))              mCommandPort = aCmd->argInt(1);
-   if (aCmd->isCmd("StatusPort"))               mStatusPort = aCmd->argInt(1);
+   if (aCmd->isCmd("BackEndIpAddresss"))        aCmd->copyArgString(1, mBackEndIpAddress, cMaxStringSize);
+   if (aCmd->isCmd("FrontEndIpAddresss"))       aCmd->copyArgString(1, mFrontEndIpAddress, cMaxStringSize);
+
+   if (aCmd->isCmd("CommandInputPort"))         mCommandInputPort = aCmd->argInt(1);
+   if (aCmd->isCmd("CommandOutputPort"))        mCommandInputPort = aCmd->argInt(1);
+   if (aCmd->isCmd("StatusOutputPort"))         mStatusOutputPort = aCmd->argInt(1);
+
 
    if (aCmd->isCmd("CommandPrintLevel"))        mCommandPrintLevel.readArgs(aCmd);
    if (aCmd->isCmd("CommandUdpPrintLevel"))     mCommandUdpPrintLevel.readArgs(aCmd);

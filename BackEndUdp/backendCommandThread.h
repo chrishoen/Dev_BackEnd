@@ -1,7 +1,7 @@
 #pragma once
 
 /*==============================================================================
-named pipe command execution thread.
+backend command execution thread.
 ==============================================================================*/
 
 //******************************************************************************
@@ -11,6 +11,7 @@ named pipe command execution thread.
 #include <string>
 #include "risNetUdpStringThread.h"
 #include "risThreadsQCallThread.h"
+#include "risCmdLineCmd.h"
 
 namespace BackEnd
 {
@@ -18,13 +19,13 @@ namespace BackEnd
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This thread connects to a client via a named pipes. It sends status
-// to the client.
+// This thread connects to a client two udp sockets. It receives commands
+// from a client, executes them, and sends responses to the client.
 // 
 // It inherits from BaseQCallThread to obtain a call queue based thread
 // functionality.
 
-class StatusThread : public Ris::Threads::BaseQCallThread
+class CommandThread : public Ris::Threads::BaseQCallThread
 {
 public:
    typedef Ris::Threads::BaseQCallThread BaseClass;
@@ -43,19 +44,11 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Members.
-
-   // This determines which status is shown.
-   int mShowCode;
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
    // Methods.
 
    // Constructor.
-   StatusThread();
-   ~StatusThread();
+   CommandThread();
+   ~CommandThread();
 
    //***************************************************************************
    //***************************************************************************
@@ -73,19 +66,43 @@ public:
    // Show thread state info.
    void showThreadInfo() override;
 
-   // Execute periodically. This is called by the base class timer.
-   void executeOnTimer(int aCurrentTimeCount) override;
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Receive message qcall.
+
+   // qcall registered to the mTcpStringThread child thread. It is invoked when
+   // a message is received. It process the received messages.
+   Ris::Net::UdpStringThread::RxStringQCall mRxStringQCall;
+
+   // Call one of the specific receive message handlers. This is bound to the
+   // qcall.
+   void executeRxString(std::string* aString);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
-   // Methods. Show status periodically.
+   // Methods.
 
-   // Show status.
-   void show2(int aCount);
+   // Send a string via the string thread
+   void send(const char* aString);
+   void send(std::string* aString);
 
-   // Send status to the pipe client.
-   void send(int aCount);
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Execute commands.
+
+   // Execute a command line command that is received from the read pipe.
+   // It calls one of the following specific command execution functions.
+   void execute(Ris::CmdLineCmd* aCmd);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Execute commands.
+
+   void executeCommand1(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************
@@ -93,10 +110,10 @@ public:
 //******************************************************************************
 // Global singular instance.
 
-#ifdef _BACKENDSTATUSTHREAD_CPP_
-       StatusThread* gStatusThread = 0;
+#ifdef _BACKENDCOMMANDTHREAD_CPP_
+       CommandThread* gCommandThread = 0;
 #else
-extern StatusThread* gStatusThread;
+extern CommandThread* gCommandThread;
 #endif
 
 //******************************************************************************
