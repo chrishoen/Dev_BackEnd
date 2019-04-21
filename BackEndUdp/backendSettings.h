@@ -73,10 +73,9 @@ public:
    bool mStatusEnable;
 
    TS::PrintLevel mCommandPrintLevel;
-   TS::PrintLevel mCommandReaderPrintLevel;
-   TS::PrintLevel mCommandWriterPrintLevel;
+   TS::PrintLevel mCommandUdpPrintLevel;
    TS::PrintLevel mStatusPrintLevel;
-   TS::PrintLevel mStatusWriterPrintLevel;
+   TS::PrintLevel mStatusUdpPrintLevel;
 
    // Status and command udp ports.
    int mCommandPort;

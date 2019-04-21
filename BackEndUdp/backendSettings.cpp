@@ -51,11 +51,10 @@ void Settings::show()
    printf("Settings************************************************ %s\n", mTargetSection);
 
    printf("\n");
-   printf("CommandPrintLevel         %-10s\n", mCommandPrintLevel.asString(tBuffer));
-   printf("CommandReaderPrintLevel   %-10s\n", mCommandReaderPrintLevel.asString(tBuffer));
-   printf("CommandWriterPrintLevel   %-10s\n", mCommandWriterPrintLevel.asString(tBuffer));
-   printf("StatusPrintLevel          %-10s\n", mStatusPrintLevel.asString(tBuffer));
-   printf("StatusWriterPrintLevel    %-10s\n", mStatusPrintLevel.asString(tBuffer));
+   printf("CommandPrintLevel          %-10s\n", mCommandPrintLevel.asString(tBuffer));
+   printf("CommandUdpPrintLevel       %-10s\n", mCommandUdpPrintLevel.asString(tBuffer));
+   printf("StatusPrintLevel           %-10s\n", mStatusPrintLevel.asString(tBuffer));
+   printf("StatusUdpPrintLevel        %-10s\n", mStatusUdpPrintLevel.asString(tBuffer));
 
    printf("\n");
    printf("CommandPort                %10d\n", mCommandPort);
@@ -77,10 +76,9 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("StatusPort"))               mStatusPort = aCmd->argInt(1);
 
    if (aCmd->isCmd("CommandPrintLevel"))        mCommandPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("CommandReaderPrintLevel"))  mCommandReaderPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("CommandWriterPrintLevel"))  mCommandWriterPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("CommandUdpPrintLevel"))     mCommandUdpPrintLevel.readArgs(aCmd);
    if (aCmd->isCmd("StatusPrintLevel"))         mStatusPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("StatusWriterPrintLevel"))   mStatusWriterPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("StatusUdpPrintLevel"))      mStatusUdpPrintLevel.readArgs(aCmd);
 }
 
 //******************************************************************************

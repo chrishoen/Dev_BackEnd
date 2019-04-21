@@ -49,9 +49,8 @@ void StatusThread::threadInitFunction()
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
 
-   tSettings.setLocalIp("127.0.0.1", gSettings.mStatusPort);
    tSettings.setRemoteIp("127.0.0.1", gSettings.mStatusPort);
-   tSettings.mPrintLevel = gSettings.mStatusWriterPrintLevel;
+   tSettings.mPrintLevel = gSettings.mStatusUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
 
    // Create the child thread with the settings.
@@ -91,7 +90,9 @@ void StatusThread::showThreadInfo()
 
 void StatusThread::executeOnTimer(int aCount)
 {
-   // Send .
+   Prn::print(Prn::View21, "TIMER %5d", aCount);
+
+   // Send.
    char tString[200];
    sprintf(tString, "status_update %d", aCount);
    mStringThread->sendString(new std::string(tString));

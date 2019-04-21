@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "risProgramTime.h"
+#include "backendSettings.h"
 #include "CmdLineExec.h"
 
 //******************************************************************************
@@ -27,12 +27,13 @@ void CmdLineExec::reset()
 
 void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 {
-   if(aCmd->isCmd("RESET"  ))  reset();
-   if(aCmd->isCmd("GO1"    ))  executeGo1(aCmd);
-   if(aCmd->isCmd("GO2"    ))  executeGo2(aCmd);
-   if(aCmd->isCmd("GO3"    ))  executeGo3(aCmd);
-   if(aCmd->isCmd("GO4"    ))  executeGo4(aCmd);
-   if(aCmd->isCmd("GO5"    ))  executeGo5(aCmd);
+   if (aCmd->isCmd("RESET"))  reset();
+   if (aCmd->isCmd("GO1"))  executeGo1(aCmd);
+   if (aCmd->isCmd("GO2"))  executeGo2(aCmd);
+   if (aCmd->isCmd("GO3"))  executeGo3(aCmd);
+   if (aCmd->isCmd("GO4"))  executeGo4(aCmd);
+   if (aCmd->isCmd("GO5"))  executeGo5(aCmd);
+   if (aCmd->isCmd("Parms")) executeParms(aCmd);
 }
 
 //******************************************************************************
@@ -55,8 +56,6 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   double tTime = Ris::getCurrentProgramTime();
-   Prn::print(0, "time %10.4f", tTime);
 }
 
 //******************************************************************************
@@ -65,15 +64,6 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   char tString[200];
-
-   while (true)
-   {
-      fgets(tString, 200, stdin);
-      printf("CMD %d %s", (int)strlen(tString), tString);
-      if (strcmp(tString, "e\n") == 0) break;
-   }
-
 }
 
 //******************************************************************************
@@ -90,5 +80,16 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 {
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
+{
+   BackEnd::gSettings.reset();
+   BackEnd::gSettings.readSection("default");
+   BackEnd::gSettings.show();
 }
 
