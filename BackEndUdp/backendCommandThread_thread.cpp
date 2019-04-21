@@ -28,6 +28,9 @@ CommandThread::CommandThread()
    BaseClass::setThreadPrintLevel(gSettings.mStatusPrintLevel);
    BaseClass::mTimerPeriod = 1000;
 
+   // Bind qcalls.
+   mRxStringQCall.bind(this, &CommandThread::executeRxString);
+
    // Initialize variables.
    mStringThread = 0;
 }
@@ -52,6 +55,7 @@ void CommandThread::threadInitFunction()
    tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mCommandOutputPort);
    tSettings.mPrintLevel = gSettings.mCommandUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
+   tSettings.mRxStringQCall = mRxStringQCall;
 
    // Create the child thread with the settings.
    mStringThread = new Ris::Net::UdpStringThread(tSettings);
@@ -91,11 +95,11 @@ void CommandThread::showThreadInfo()
 
 void CommandThread::executeRxString(std::string* aString)
 {
+   Prn::print(Prn::View21, "CommandThread RxString %s", aString->c_str());
    // Guard.
    if (aString == 0) return;
    if (aString->length() == 0) return;
 
-   Prn::print(Prn::View21, "CommandThread RxString %s", aString->c_str());
 
    // Get command line command from input string.
    Ris::CmdLineCmd tCmd(aString->c_str());

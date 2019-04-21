@@ -88,8 +88,6 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeParms(Ris::CmdLineCmd* aCmd)
 {
-   BackEnd::gSettings.reset();
-   BackEnd::gSettings.readSection("default");
    BackEnd::gSettings.show();
 }
 

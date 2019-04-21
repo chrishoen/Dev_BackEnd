@@ -78,11 +78,11 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
-   if (aCmd->isCmd("BackEndIpAddresss"))        aCmd->copyArgString(1, mBackEndIpAddress, cMaxStringSize);
-   if (aCmd->isCmd("FrontEndIpAddresss"))       aCmd->copyArgString(1, mFrontEndIpAddress, cMaxStringSize);
+   if (aCmd->isCmd("BackEndIpAddress"))         aCmd->copyArgString(1, mBackEndIpAddress, cMaxStringSize);
+   if (aCmd->isCmd("FrontEndIpAddress"))        aCmd->copyArgString(1, mFrontEndIpAddress, cMaxStringSize);
 
    if (aCmd->isCmd("CommandInputPort"))         mCommandInputPort = aCmd->argInt(1);
-   if (aCmd->isCmd("CommandOutputPort"))        mCommandInputPort = aCmd->argInt(1);
+   if (aCmd->isCmd("CommandOutputPort"))        mCommandOutputPort = aCmd->argInt(1);
    if (aCmd->isCmd("StatusOutputPort"))         mStatusOutputPort = aCmd->argInt(1);
 
 

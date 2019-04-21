@@ -26,7 +26,7 @@ void CommandThread::execute(Ris::CmdLineCmd* aCmd)
 
 void CommandThread::executeCommand1(Ris::CmdLineCmd* aCmd)
 {
-   mStringThread->sendString("done command1"); 
+   mStringThread->sendString("command1: done"); 
 }
 
 //******************************************************************************
