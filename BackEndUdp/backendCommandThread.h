@@ -44,6 +44,15 @@ public:
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
+   // Members.
+
+   // Command completion counters.
+   int  mCommand1CountZero;
+   int  mCommand2CountZero;
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
    // Methods.
 
    // Constructor.
@@ -62,6 +71,10 @@ public:
    // Thread exit function. This is called by the base class immediately
    // before the thread is terminated. It shuts down the child thread.
    void threadExitFunction() override;
+
+   // Execute periodically. This is called by the base class timer. It
+   // sends command completions.
+   void executeOnTimer(int aTimerCount) override;
 
    // Show thread state info.
    void showThreadInfo() override;
@@ -103,6 +116,7 @@ public:
    // Methods. Execute commands.
 
    void executeCommand1(Ris::CmdLineCmd* aCmd);
+   void executeCommand2(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************

@@ -33,6 +33,8 @@ CommandThread::CommandThread()
 
    // Initialize variables.
    mStringThread = 0;
+   mCommand1CountZero = 0;
+   mCommand2CountZero = 0;
 }
 
 CommandThread::~CommandThread()
