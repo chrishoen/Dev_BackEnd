@@ -102,9 +102,8 @@ void CommandThread::executeRxString(std::string* aString)
    if (aString == 0) return;
    if (aString->length() == 0) return;
 
-
-   // Get command line command from input string.
-   Ris::CmdLineCmd tCmd(aString->c_str());
+   // Get command line command from input string, parse with csv.
+   Ris::CmdLineCmd tCmd(aString->c_str(),true);
    delete aString;
 
    // Execute the command line command with the given executive.

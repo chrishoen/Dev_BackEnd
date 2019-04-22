@@ -30,12 +30,12 @@ void CommandThread::executeCommand1(Ris::CmdLineCmd* aCmd)
    // Guard.
    if (mCommand1CountZero)
    {
-      mStringThread->sendString("command1: nak: already running");
+      mStringThread->sendString("Command1,nak,already running");
       return;
    }
 
    // Ack the command.
-   mStringThread->sendString("command1: ack");
+   mStringThread->sendString("Command1,ack");
 
    // Execute the command.
    mCommand1CountZero = 4;
@@ -50,12 +50,12 @@ void CommandThread::executeCommand2(Ris::CmdLineCmd* aCmd)
    // Guard.
    if (mCommand2CountZero)
    {
-      mStringThread->sendString("command2: nak: already running");
+      mStringThread->sendString("Command2,nak,already running");
       return;
    }
 
    // Ack the command.
-   mStringThread->sendString("command2: ack");
+   mStringThread->sendString("Command2,ack");
 
    // Execute the command.
    mCommand2CountZero = 10;
@@ -76,7 +76,7 @@ void CommandThread::executeOnTimer(int aTimerCount)
       if (--mCommand1CountZero == 0)
       {
          // Call the completion callback.
-         mStringThread->sendString("command1: done");
+         mStringThread->sendString("Command1,done");
       }
    }
 
@@ -85,14 +85,14 @@ void CommandThread::executeOnTimer(int aTimerCount)
    {
       // Call the progress callback.
       char tString[100];
-      sprintf(tString, "command2: progress: working %d", mCommand2CountZero);
+      sprintf(tString, "Command2,progress,working %d", mCommand2CountZero);
       mStringThread->sendString(tString);
 
       // Decrement the count to zero.
       if (--mCommand2CountZero == 0)
       {
          // Call the completion callback.
-         mStringThread->sendString("command2: done");
+         mStringThread->sendString("Command2,done");
       }
    }
 }
