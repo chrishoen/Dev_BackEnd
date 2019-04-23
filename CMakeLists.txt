@@ -9,7 +9,7 @@ include(MyLocalImports.cmake)
 project ("Dev_BackEnd")
 my_init_global_import_variables()
 
-add_subdirectory ("BackEndUdp")
+add_subdirectory ("BackEnd")
 return()
 
 add_subdirectory ("BackEndDLL")
