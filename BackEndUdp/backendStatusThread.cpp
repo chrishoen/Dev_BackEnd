@@ -49,7 +49,7 @@ void StatusThread::threadInitFunction()
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
 
-   tSettings.setRemoteIp("127.0.0.1", gSettings.mStatusOutputPort);
+   tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mStatusOutputPort);
    tSettings.mPrintLevel = gSettings.mStatusUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
 
