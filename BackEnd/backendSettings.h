@@ -77,13 +77,12 @@ public:
    TS::PrintLevel mStatusPrintLevel;
    TS::PrintLevel mStatusUdpPrintLevel;
 
-   // Status and command udp ports.
-   char mBackEndIpAddress[cMaxStringSize];
+   // Udp ip addresses and receive ports.
    char mFrontEndIpAddress[cMaxStringSize];
 
-   int mCommandInputPort;
-   int mCommandOutputPort;
-   int mStatusOutputPort;
+   int mBackEndControlPort;
+   int mFrontEndControlPort;
+   int mFrontEndIsochPort;
 
    //***************************************************************************
    //***************************************************************************

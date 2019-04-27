@@ -49,7 +49,7 @@ void IsochThread::threadInitFunction()
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
 
-   tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mStatusOutputPort);
+   tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mFrontEndIsochPort);
    tSettings.mPrintLevel = gSettings.mStatusUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
 

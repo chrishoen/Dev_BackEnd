@@ -34,11 +34,10 @@ void Settings::reset()
    BaseClass::reset();
    BaseClass::setFileName_RelAlphaFiles("/BackEnd/BackEnd_Settings.txt");
 
-   mBackEndIpAddress[0];
    mFrontEndIpAddress[0];
-   mCommandInputPort = 0;
-   mCommandOutputPort = 0;
-   mStatusOutputPort = 0;
+   mBackEndControlPort = 0;
+   mFrontEndControlPort = 0;
+   mFrontEndIsochPort = 0;
 }
 
 //******************************************************************************
@@ -53,11 +52,10 @@ void Settings::show()
    printf("BackEnd Settings***************************************** %s\n", mTargetSection);
 
    printf("\n");
-   printf("BackEndIpAddress           %10s\n", mBackEndIpAddress);
-   printf("FrontEndIpAddress          %10s\n", mFrontEndIpAddress);
-   printf("CommandInputPort           %10d\n", mCommandInputPort);
-   printf("CommandOutputPort          %10d\n", mCommandOutputPort);
-   printf("StatusOutputPort           %10d\n", mStatusOutputPort);
+   printf("FrontEndIpAddress          %-10s\n", mFrontEndIpAddress);
+   printf("BackEndControlPort         %-10d\n", mBackEndControlPort);
+   printf("FrontEndControlPort        %-10d\n", mFrontEndControlPort);
+   printf("FrontEndIsochPort          %-10d\n", mFrontEndIsochPort);
 
    printf("\n");
    printf("CommandPrintLevel          %-10s\n", mCommandPrintLevel.asString(tBuffer));
@@ -78,13 +76,10 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
 {
    if (!isTargetSection(aCmd)) return;
 
-   if (aCmd->isCmd("BackEndIpAddress"))         aCmd->copyArgString(1, mBackEndIpAddress, cMaxStringSize);
    if (aCmd->isCmd("FrontEndIpAddress"))        aCmd->copyArgString(1, mFrontEndIpAddress, cMaxStringSize);
-
-   if (aCmd->isCmd("CommandInputPort"))         mCommandInputPort = aCmd->argInt(1);
-   if (aCmd->isCmd("CommandOutputPort"))        mCommandOutputPort = aCmd->argInt(1);
-   if (aCmd->isCmd("StatusOutputPort"))         mStatusOutputPort = aCmd->argInt(1);
-
+   if (aCmd->isCmd("BackEndControlPort"))       mBackEndControlPort = aCmd->argInt(1);
+   if (aCmd->isCmd("FrontEndControlPort"))      mFrontEndControlPort = aCmd->argInt(1);
+   if (aCmd->isCmd("FrontEndIsochPort"))        mFrontEndIsochPort = aCmd->argInt(1);
 
    if (aCmd->isCmd("CommandPrintLevel"))        mCommandPrintLevel.readArgs(aCmd);
    if (aCmd->isCmd("CommandUdpPrintLevel"))     mCommandUdpPrintLevel.readArgs(aCmd);

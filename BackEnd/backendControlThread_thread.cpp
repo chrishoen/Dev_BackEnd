@@ -53,8 +53,8 @@ void ControlThread::threadInitFunction()
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
 
-   tSettings.setLocalIp("0.0.0.0", gSettings.mCommandInputPort);
-   tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mCommandOutputPort);
+   tSettings.setLocalIp("0.0.0.0", gSettings.mBackEndControlPort);
+   tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mFrontEndControlPort);
    tSettings.mPrintLevel = gSettings.mCommandUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
    tSettings.mRxStringQCall = mRxStringQCall;
