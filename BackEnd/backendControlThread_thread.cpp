@@ -9,8 +9,8 @@
 #include "backendSettings.h"
 #include "risThreadsPriorities.h"
 
-#define  _BACKENDCOMMANDTHREAD_CPP_
-#include "backendCommandThread.h"
+#define  _BACKENDCONTROLTHREAD_CPP_
+#include "backendControlThread.h"
 
 namespace BackEnd
 {
@@ -20,7 +20,7 @@ namespace BackEnd
 //******************************************************************************
 // Constructor.
 
-CommandThread::CommandThread()
+ControlThread::ControlThread()
 {
    // Set base class thread variables.
    BaseClass::setThreadName("Command");
@@ -29,7 +29,7 @@ CommandThread::CommandThread()
    BaseClass::mTimerPeriod = 1000;
 
    // Bind qcalls.
-   mRxStringQCall.bind(this, &CommandThread::executeRxString);
+   mRxStringQCall.bind(this, &ControlThread::executeRxString);
 
    // Initialize variables.
    mStringThread = 0;
@@ -37,7 +37,7 @@ CommandThread::CommandThread()
    mCommand2CountZero = 0;
 }
 
-CommandThread::~CommandThread()
+ControlThread::~ControlThread()
 {
    delete mStringThread;
 }
@@ -48,7 +48,7 @@ CommandThread::~CommandThread()
 // Thread init function. This is called by the base class immediately 
 // after the thread starts running. It starts the child thread.
 
-void CommandThread::threadInitFunction()
+void ControlThread::threadInitFunction()
 {
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
@@ -72,7 +72,7 @@ void CommandThread::threadInitFunction()
 // Thread exit function. This is called by the base class immediately
 // before the thread is terminated. It shuts down the child thread.
 
-void  CommandThread::threadExitFunction()
+void  ControlThread::threadExitFunction()
 {
    // Shutdown the child threads.
    mStringThread->shutdownThread();
@@ -83,7 +83,7 @@ void  CommandThread::threadExitFunction()
 //******************************************************************************
 // Show thread state info, base class overload.
 
-void CommandThread::showThreadInfo()
+void ControlThread::showThreadInfo()
 {
    BaseClass::showThreadInfo();
    mStringThread->showThreadInfo();
@@ -95,9 +95,9 @@ void CommandThread::showThreadInfo()
 // QCall registered to the pipe reader child thread. It is invoked when
 // a string is received. It process the received string.
 
-void CommandThread::executeRxString(std::string* aString)
+void ControlThread::executeRxString(std::string* aString)
 {
-   Prn::print(Prn::View21, "CommandThread RxString %s", aString->c_str());
+   Prn::print(Prn::View21, "ControlThread RxString %s", aString->c_str());
    // Guard.
    if (aString == 0) return;
    if (aString->length() == 0) return;

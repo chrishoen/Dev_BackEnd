@@ -25,7 +25,7 @@ namespace BackEnd
 // It inherits from BaseQCallThread to obtain a call queue based thread
 // functionality.
 
-class CommandThread : public Ris::Threads::BaseQCallThread
+class ControlThread : public Ris::Threads::BaseQCallThread
 {
 public:
    typedef Ris::Threads::BaseQCallThread BaseClass;
@@ -56,8 +56,8 @@ public:
    // Methods.
 
    // Constructor.
-   CommandThread();
-   ~CommandThread();
+   ControlThread();
+   ~ControlThread();
 
    //***************************************************************************
    //***************************************************************************
@@ -124,10 +124,10 @@ public:
 //******************************************************************************
 // Global singular instance.
 
-#ifdef _BACKENDCOMMANDTHREAD_CPP_
-       CommandThread* gCommandThread = 0;
+#ifdef _BACKENDCONTROLTHREAD_CPP_
+       ControlThread* gControlThread = 0;
 #else
-extern CommandThread* gCommandThread;
+extern ControlThread* gControlThread;
 #endif
 
 //******************************************************************************

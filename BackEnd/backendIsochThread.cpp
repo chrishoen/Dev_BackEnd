@@ -9,8 +9,8 @@
 #include "backendSettings.h"
 #include "risThreadsPriorities.h"
 
-#define  _BACKENDSTATUSTHREAD_CPP_
-#include "backendStatusThread.h"
+#define  _BACKENDISOCHTHREAD_CPP_
+#include "backendIsochThread.h"
 
 namespace BackEnd
 {
@@ -20,7 +20,7 @@ namespace BackEnd
 //******************************************************************************
 // Constructor.
 
-StatusThread::StatusThread()
+IsochThread::IsochThread()
 {
    // Set base class thread variables.
    BaseClass::setThreadName("Status");
@@ -33,7 +33,7 @@ StatusThread::StatusThread()
    mShowCode = 0;
 }
 
-StatusThread::~StatusThread()
+IsochThread::~IsochThread()
 {
    delete mStringThread;
 }
@@ -44,7 +44,7 @@ StatusThread::~StatusThread()
 // Thread init function. This is called by the base class immediately 
 // after the thread starts running. It starts the child thread.
 
-void StatusThread::threadInitFunction()
+void IsochThread::threadInitFunction()
 {
    // Instance of network socket settings.
    Ris::Net::Settings tSettings;
@@ -66,7 +66,7 @@ void StatusThread::threadInitFunction()
 // Thread exit function. This is called by the base class immediately
 // before the thread is terminated. It shuts down the child thread.
 
-void  StatusThread::threadExitFunction()
+void  IsochThread::threadExitFunction()
 {
    // Shutdown the child threads.
    mStringThread->shutdownThread();
@@ -77,7 +77,7 @@ void  StatusThread::threadExitFunction()
 //******************************************************************************
 // Show thread state info, base class overload.
 
-void StatusThread::showThreadInfo()
+void IsochThread::showThreadInfo()
 {
    BaseClass::showThreadInfo();
    mStringThread->showThreadInfo();
@@ -88,7 +88,7 @@ void StatusThread::showThreadInfo()
 //******************************************************************************
 // Execute periodically. This is called by the base class timer.
 
-void StatusThread::executeOnTimer(int aCount)
+void IsochThread::executeOnTimer(int aCount)
 {
    Prn::print(Prn::View21, "STATUS TIMER %5d", aCount);
 

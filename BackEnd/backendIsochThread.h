@@ -24,7 +24,7 @@ namespace BackEnd
 // It inherits from BaseQCallThread to obtain a call queue based thread
 // functionality.
 
-class StatusThread : public Ris::Threads::BaseQCallThread
+class IsochThread : public Ris::Threads::BaseQCallThread
 {
 public:
    typedef Ris::Threads::BaseQCallThread BaseClass;
@@ -54,8 +54,8 @@ public:
    // Methods.
 
    // Constructor.
-   StatusThread();
-   ~StatusThread();
+   IsochThread();
+   ~IsochThread();
 
    //***************************************************************************
    //***************************************************************************
@@ -93,10 +93,10 @@ public:
 //******************************************************************************
 // Global singular instance.
 
-#ifdef _BACKENDSTATUSTHREAD_CPP_
-       StatusThread* gStatusThread = 0;
+#ifdef _BACKENDISOCHTHREAD_CPP_
+       IsochThread* gIsochThread = 0;
 #else
-extern StatusThread* gStatusThread;
+extern IsochThread* gIsochThread;
 #endif
 
 //******************************************************************************

@@ -6,8 +6,8 @@
 #include "MainInit.h"
 
 #include "tsPrintThread.h"
-#include "backendStatusThread.h"
-#include "backendCommandThread.h"
+#include "backendIsochThread.h"
+#include "backendControlThread.h"
 
 //******************************************************************************
 //******************************************************************************
@@ -27,11 +27,11 @@ int main(int argc,char** argv)
    //***************************************************************************
    // Launch program threads.
 
-   BackEnd::gStatusThread = new BackEnd::StatusThread;
-   BackEnd::gStatusThread->launchThread();
+   BackEnd::gIsochThread = new BackEnd::IsochThread;
+   BackEnd::gIsochThread->launchThread();
 
-   BackEnd::gCommandThread = new BackEnd::CommandThread;
-   BackEnd::gCommandThread->launchThread();
+   BackEnd::gControlThread = new BackEnd::ControlThread;
+   BackEnd::gControlThread->launchThread();
 
    //***************************************************************************
    //***************************************************************************
@@ -40,8 +40,8 @@ int main(int argc,char** argv)
 
    Ris::Threads::showCurrentThreadInfo();
    TS::gPrintThread->showThreadInfo();
-   BackEnd::gStatusThread->showThreadInfo();
-   BackEnd::gCommandThread->showThreadInfo();
+   BackEnd::gIsochThread->showThreadInfo();
+   BackEnd::gControlThread->showThreadInfo();
 
    //***************************************************************************
    //***************************************************************************
@@ -57,13 +57,13 @@ int main(int argc,char** argv)
    //***************************************************************************
    // Shutdown program Threads.
 
-   BackEnd::gStatusThread->shutdownThread();
-   BackEnd::gCommandThread->shutdownThread();
+   BackEnd::gIsochThread->shutdownThread();
+   BackEnd::gControlThread->shutdownThread();
 
-   delete BackEnd::gStatusThread;
-   delete BackEnd::gCommandThread;
-   BackEnd::gStatusThread = 0;
-   BackEnd::gCommandThread = 0;
+   delete BackEnd::gIsochThread;
+   delete BackEnd::gControlThread;
+   BackEnd::gIsochThread = 0;
+   BackEnd::gControlThread = 0;
 
    //***************************************************************************
    //***************************************************************************

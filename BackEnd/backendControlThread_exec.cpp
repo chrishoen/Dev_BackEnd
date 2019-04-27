@@ -6,7 +6,7 @@
 //******************************************************************************
 #include "stdafx.h"
 
-#include "backendCommandThread.h"
+#include "backendControlThread.h"
 
 namespace BackEnd
 {
@@ -15,7 +15,7 @@ namespace BackEnd
 //******************************************************************************
 //******************************************************************************
 
-void CommandThread::execute(Ris::CmdLineCmd* aCmd)
+void ControlThread::execute(Ris::CmdLineCmd* aCmd)
 {
    if (aCmd->isCmd("command1"))  executeCommand1(aCmd);
    if (aCmd->isCmd("command2"))  executeCommand2(aCmd);
@@ -25,7 +25,7 @@ void CommandThread::execute(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CommandThread::executeCommand1(Ris::CmdLineCmd* aCmd)
+void ControlThread::executeCommand1(Ris::CmdLineCmd* aCmd)
 {
    // Guard.
    if (mCommand1CountZero)
@@ -45,7 +45,7 @@ void CommandThread::executeCommand1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 
-void CommandThread::executeCommand2(Ris::CmdLineCmd* aCmd)
+void ControlThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 {
    // Guard.
    if (mCommand2CountZero)
@@ -67,7 +67,7 @@ void CommandThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 // Execute periodically. This is called by the base class timer. It
 // sends an echo request message.
 
-void CommandThread::executeOnTimer(int aTimerCount)
+void ControlThread::executeOnTimer(int aTimerCount)
 {
    // Execute command1.
    if (mCommand1CountZero)
