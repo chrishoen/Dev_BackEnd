@@ -23,7 +23,7 @@ namespace BackEnd
 IsochThread::IsochThread()
 {
    // Set base class thread variables.
-   BaseClass::setThreadName("Status");
+   BaseClass::setThreadName("Isoch");
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mNormal);
    BaseClass::setThreadPrintLevel(gSettings.mStatusPrintLevel);
    BaseClass::mTimerPeriod = 1000;
@@ -90,11 +90,11 @@ void IsochThread::showThreadInfo()
 
 void IsochThread::executeOnTimer(int aCount)
 {
-   Prn::print(Prn::View21, "STATUS TIMER %5d", aCount);
+   Prn::print(Prn::View21, "ISOCH TIMER  %5d", aCount);
 
    // Send.
    char tString[200];
-   sprintf(tString, "status_update %d", aCount);
+   sprintf(tString,"Signal,%d", aCount);
    mStringThread->sendString(new std::string(tString));
 }
 
