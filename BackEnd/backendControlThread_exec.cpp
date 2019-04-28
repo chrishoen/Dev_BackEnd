@@ -22,11 +22,17 @@ void ControlThread::execute(Ris::CmdLineCmd* aCmd)
       if (aCmd->isArgString(1, "Command1"))  executeCommand1(aCmd);
       if (aCmd->isArgString(1, "Command2"))  executeCommand2(aCmd);
    }
+
+   if (aCmd->isCmd("DataRequest"))
+   {
+      if (aCmd->isArgString(1, "Data1"))     executeData1(aCmd);
+   }
 }
 
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Execute control command.
 
 void ControlThread::executeCommand1(Ris::CmdLineCmd* aCmd)
 {
@@ -47,6 +53,7 @@ void ControlThread::executeCommand1(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// Execute control command.
 
 void ControlThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 {
@@ -62,6 +69,16 @@ void ControlThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 
    // Execute the command.
    mCommand2CountZero = 10;
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Execute control command.
+
+void ControlThread::executeData1(Ris::CmdLineCmd* aCmd)
+{
+   mStringThread->sendString("DataResponse,Data1,item0,item1,item2,item3");
 }
 
 //******************************************************************************
