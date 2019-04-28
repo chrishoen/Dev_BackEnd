@@ -74,8 +74,13 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
    std::ifstream tFile("C:\\MyJson\\input101.json");
    Json::Value tRoot;
    tFile >> tRoot;
-   std::cout << tRoot;
-   std::cout << std::endl;
+   std::cout << tRoot << std::endl;
+
+   std::string tMsgId = tRoot["msg-id"].asString();
+   std::cout << "msg-id  " << tMsgId << std::endl;
+
+   tRoot["msg-id"] = "test2_msg";
+   std::cout << tRoot << std::endl;
 }
 
 //******************************************************************************
