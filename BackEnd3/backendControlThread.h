@@ -11,7 +11,11 @@ backend command execution thread.
 #include <string>
 #include "risNetUdpStringThread.h"
 #include "risThreadsQCallThread.h"
-#include "risCmdLineCmd.h"
+
+namespace Json
+{
+   class Value;
+}
 
 namespace BackEnd
 {
@@ -84,40 +88,35 @@ public:
    //***************************************************************************
    // Methods. Receive message qcall.
 
-   // qcall registered to the mTcpStringThread child thread. It is invoked when
-   // a message is received. It process the received messages.
+   // qcall registered to the mStringThread child thread. It is invoked when
+   // a string is received.
    Ris::Net::UdpStringThread::RxStringQCall mRxStringQCall;
 
-   // Call one of the specific receive message handlers. This is bound to the
-   // qcall.
+   // Convert the received string to a json value and call one of the 
+   // message handlers. This is bound to the qcall.
    void executeRxString(std::string* aString);
+
+   //***************************************************************************
+   //***************************************************************************
+   //***************************************************************************
+   // Methods. Message handlers. These process received json messages and
+   // transmit json response messages.
+
+   // Main message handler.
+   void processRxMsg(Json::Value& aMsg);
+
+   // Specific message handlers.
+   void processRxMsg_Command1(Json::Value& aMsg);
+   void processRxMsg_Command2(Json::Value& aMsg);
+   void processRxMsg_DataRequest(Json::Value& aMsg);
 
    //***************************************************************************
    //***************************************************************************
    //***************************************************************************
    // Methods.
 
-   // Send a string via the string thread
-   void send(const char* aString);
-   void send(std::string* aString);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Methods. Execute commands.
-
-   // Execute a command line command that is received from the read pipe.
-   // It calls one of the following specific command execution functions.
-   void execute(Ris::CmdLineCmd* aCmd);
-
-   //***************************************************************************
-   //***************************************************************************
-   //***************************************************************************
-   // Methods. Execute commands.
-
-   void executeCommand1(Ris::CmdLineCmd* aCmd);
-   void executeCommand2(Ris::CmdLineCmd* aCmd);
-   void executeDataA(Ris::CmdLineCmd* aCmd);
+   // Send a json message via the string thread.
+   void sendMsg(const Json::Value& aMsg);
 };
 
 //******************************************************************************

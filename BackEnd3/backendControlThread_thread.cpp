@@ -8,6 +8,7 @@
 
 #include "backendSettings.h"
 #include "risThreadsPriorities.h"
+#include "json.h"
 
 #define  _BACKENDCONTROLTHREAD_CPP_
 #include "backendControlThread.h"
@@ -92,30 +93,55 @@ void ControlThread::showThreadInfo()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// QCall registered to the pipe reader child thread. It is invoked when
-// a string is received. It process the received string.
+// Convert the received string to a json value and call one of the 
+// message handlers. This is bound to the qcall.
 
 void ControlThread::executeRxString(std::string* aString)
 {
    Prn::print(Prn::View21, "ControlThread RxString %s", aString->c_str());
-   // Guard.
-   if (aString == 0) return;
-   if (aString->length() == 0) return;
 
-   // Get command line command from input string, parse with csv.
-   Ris::CmdLineCmd tCmd(aString->c_str(),true);
+   // Guard.
+   if (aString == 0 || aString->length() == 0)
+   {
+      Prn::print(Prn::View21, "ControlThread RxString string ERROR");
+      return;
+   }
+
+   // Json variables.
+   Json::Value tMsg;
+   Json::Reader tReader;
+
+   // Parse the received string into json message
+   tReader.parse(*aString, tMsg);
+
+   // Delete the received string.
    delete aString;
 
-   // Execute the command line command with the given executive.
-   execute(&tCmd);
-
-   // Test for bad command. This is true if the executive didn't
-   // accept the command.
-   if (tCmd.isBadCmd())
+   // Guard.
+   if (tMsg.isNull() || !tMsg.isMember("MsgId"))
    {
-      Prn::print(Prn::View21, "INVALID COMMAND\n");
-      mStringThread->sendString("nak INVALID COMMAND\n");
+      Prn::print(Prn::View21, "ControlThread RxString message ERROR");
+      return;
    }
+
+   // Process the message.
+   processRxMsg(tMsg);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Send a json message via the string thread.
+
+void ControlThread::sendMsg(const Json::Value& aMsg)
+{
+   // Write the message to a string.
+   Json::FastWriter tWriter;
+   std::string tString;
+   tString = tWriter.write(aMsg);
+
+   // Send the string via the string thread.
+   mStringThread->sendString(tString.c_str());
 }
 
 //******************************************************************************
