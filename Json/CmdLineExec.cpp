@@ -89,6 +89,16 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
+   std::ofstream tFile("C:\\MyJson\\output101.json", std::ofstream::out);
+
+   Json::Value tRoot;
+   tRoot["msg-id"] = "test3_msg";
+   tRoot["payload"] = "some_payload";
+
+   std::cout << tRoot << std::endl;
+
+   tFile << tRoot << std::endl;
+   tFile.close();
 }
 
 //******************************************************************************
@@ -97,6 +107,19 @@ void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 {
+   std::ofstream tFile("C:\\MyJson\\output101.json", std::ofstream::out);
+   std::stringstream tStream;
+   std::string tString;
+
+   Json::Value tRoot;
+   tRoot["msg-id"] = "test4_msg";
+   tRoot["payload"] = "some_payload";
+
+   tStream << tRoot << std::endl;
+   std::cout << tStream.str();
+
+   tString = tStream.str();
+   std::cout << tString;
 }
 
 //******************************************************************************
