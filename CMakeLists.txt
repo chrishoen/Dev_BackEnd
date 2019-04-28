@@ -9,12 +9,13 @@ include(MyLocalImports.cmake)
 project ("Dev_BackEnd")
 my_init_global_import_variables()
 
-add_subdirectory ("BackEnd")
+add_subdirectory ("BackEnd2")
 return()
 
 add_subdirectory ("BackEndDLL")
 add_subdirectory ("FrontEnd")
 add_subdirectory ("Test")
+
 return()
 
 
