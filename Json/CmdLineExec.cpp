@@ -1,5 +1,8 @@
 #include "stdafx.h"
 
+#include <iostream>
+#include <fstream>
+
 #include "risProgramTime.h"
 #include "json.h"
 
@@ -48,8 +51,18 @@ void CmdLineExec::execute(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 {
-   Prn::print(Prn::View11, "TESTING11");
-   Prn::print(Prn::View21, "TESTING21");
+   std::string line;
+   std::ifstream tFile("C:\\MyJson\\input101.json");
+   if (tFile.is_open())
+   {
+      while (getline(tFile, line))
+      {
+         std::cout << line << '\n';
+      }
+      tFile.close();
+   }
+
+   else std::cout << "Unable to open file";
 }
 
 //******************************************************************************
@@ -58,8 +71,11 @@ void CmdLineExec::executeGo1(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 {
-   double tTime = Ris::getCurrentProgramTime();
-   Prn::print(0, "time %10.4f", tTime);
+   std::ifstream tFile("C:\\MyJson\\input101.json");
+   Json::Value tRoot;
+   tFile >> tRoot;
+   std::cout << tRoot;
+   std::cout << std::endl;
 }
 
 //******************************************************************************
@@ -68,15 +84,6 @@ void CmdLineExec::executeGo2(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo3(Ris::CmdLineCmd* aCmd)
 {
-   char tString[200];
-
-   while (true)
-   {
-      fgets(tString, 200, stdin);
-      printf("CMD %d %s", (int)strlen(tString), tString);
-      if (strcmp(tString, "e\n") == 0) break;
-   }
-
 }
 
 //******************************************************************************
@@ -93,5 +100,7 @@ void CmdLineExec::executeGo4(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 {
+   Prn::print(Prn::View11, "TESTING11");
+   Prn::print(Prn::View21, "TESTING21");
 }
 

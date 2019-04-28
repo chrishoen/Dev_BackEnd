@@ -39,7 +39,7 @@ void main_initialize(int argc,char** argv)
    Prn::setFilter(Prn::View23, true, 2);
    Prn::setFilter(Prn::View24, true, 2);
 
-   Prn::print(0,"Test*******************************************BEGIN");
+   Prn::print(0,"Program Json*******************************************BEGIN");
 
 }
 
@@ -50,7 +50,7 @@ void main_initialize(int argc,char** argv)
 
 void main_finalize()
 {
-   Prn::print(0,"Test*******************************************END");
+   Prn::print(0, "Program Json*******************************************END");
 
    // Close print
    Prn::finalizePrint();
