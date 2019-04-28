@@ -141,6 +141,8 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
    tRoot1["msg-id"] = "test4_msg";
    tRoot1["payload"] = "some_payload";
 
+   tRoot1.
+
    std::cout << "LINE102" << std::endl;
    tStream1 << tRoot1 << std::endl;
    tString = tStream1.str();
@@ -162,6 +164,25 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo6(Ris::CmdLineCmd* aCmd)
 {
+   std::string tString;
+   Json::Value tRoot1;
+   Json::Value tRoot2;
+   Json::FastWriter tWriter;
+   Json::Reader tReader;
+
+   std::cout << "LINE101" << std::endl;
+   tRoot1["msg-id"] = "test6_msg";
+   tRoot1["payload"] = "some_payload";
+
+   tString = tWriter.write(tRoot1);
+   std::cout << "LINE102" << std::endl;
+   std::cout << tString << std::endl;
+
+   tReader.parse(tString, tRoot2);
+   std::cout << tRoot2 << std::endl;
+
+   std::cout << "LINE103" << std::endl;
+
 }
 
 //******************************************************************************
@@ -170,6 +191,29 @@ void CmdLineExec::executeGo6(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo7(Ris::CmdLineCmd* aCmd)
 {
+   std::string tString;
+   Json::Value tRoot1;
+   Json::FastWriter tWriter;
+   Json::Reader tReader;
+
+   std::cout << "LINE101" << std::endl;
+   tRoot1["MsgId"] = "Test7Msg";
+   tRoot1["Payload"] = "some_payload";
+
+   tString = tWriter.write(tRoot1);
+   std::cout << "LINE102" << std::endl;
+   std::cout << tString;
+   if (tRoot1.isMember("MsgId22"))
+   {
+      std::cout << "Is member" << std::endl;
+   }
+   else
+   {
+      std::cout << "Is not member" << std::endl;
+   }
+   std::cout << "LINE103" << std::endl;
+
+
 }
 
 //******************************************************************************
