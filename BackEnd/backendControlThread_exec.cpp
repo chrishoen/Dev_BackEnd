@@ -25,7 +25,7 @@ void ControlThread::execute(Ris::CmdLineCmd* aCmd)
 
    if (aCmd->isCmd("DataRequest"))
    {
-      if (aCmd->isArgString(1, "Data1"))     executeData1(aCmd);
+      if (aCmd->isArgString(1, "DataA"))     executeDataA(aCmd);
    }
 }
 
@@ -76,9 +76,9 @@ void ControlThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 //******************************************************************************
 // Execute control command.
 
-void ControlThread::executeData1(Ris::CmdLineCmd* aCmd)
+void ControlThread::executeDataA(Ris::CmdLineCmd* aCmd)
 {
-   mStringThread->sendString("DataResponse,Data1,item0,item1,item2,item3");
+   mStringThread->sendString("DataResponse,DataA,item0,item1,item2,item3");
 }
 
 //******************************************************************************

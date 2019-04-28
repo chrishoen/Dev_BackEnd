@@ -117,7 +117,7 @@ public:
 
    void executeCommand1(Ris::CmdLineCmd* aCmd);
    void executeCommand2(Ris::CmdLineCmd* aCmd);
-   void executeData1(Ris::CmdLineCmd* aCmd);
+   void executeDataA(Ris::CmdLineCmd* aCmd);
 };
 
 //******************************************************************************
