@@ -6,7 +6,6 @@
 #include "risProgramTime.h"
 #include "json.h"
 
-
 #include "CmdLineExec.h"
 
 //******************************************************************************
