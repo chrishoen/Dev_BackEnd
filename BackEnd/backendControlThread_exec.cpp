@@ -72,6 +72,7 @@ void ControlThread::executeCommand2(Ris::CmdLineCmd* aCmd)
 
 void ControlThread::executeOnTimer(int aTimerCount)
 {
+   Prn::print(Prn::View21, "STATUS TIMER %5d", aTimerCount);
    // Send status message.
    char tString[100];
    sprintf(tString, "Status,%d", aTimerCount);

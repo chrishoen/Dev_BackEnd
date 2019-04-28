@@ -50,7 +50,7 @@ void main_initialize()
    Prn::setFilter(Prn::View21, true, 2);
    Prn::setFilter(Prn::View22, true, 2);
    Prn::setFilter(Prn::View23, true, 2);
-   Prn::setFilter(Prn::View24, true, 2);
+   Prn::setFilter(Prn::View24, false,2);
 
    //***************************************************************************
    //***************************************************************************

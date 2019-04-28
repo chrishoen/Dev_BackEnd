@@ -90,7 +90,7 @@ void IsochThread::showThreadInfo()
 
 void IsochThread::executeOnTimer(int aCount)
 {
-   Prn::print(Prn::View21, "ISOCH TIMER  %5d", aCount);
+   Prn::print(Prn::View24, "ISOCH TIMER  %5d", aCount);
 
    // Send.
    char tString[200];
