@@ -138,6 +138,7 @@ void ControlThread::sendMsg(const Json::Value& aMsg)
    // Write the message to a string.
    Json::FastWriter tWriter;
    std::string tString;
+   tWriter.omitEndingLineFeed();
    tString = tWriter.write(aMsg);
 
    // Send the string via the string thread.
