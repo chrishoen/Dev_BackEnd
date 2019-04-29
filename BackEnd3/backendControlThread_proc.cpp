@@ -48,7 +48,7 @@ void ControlThread::processRxMsg_Command1(Json::Value& aRxMsg)
       tTxMsg["MsgId"]   = "Completion";
       tTxMsg["Command"] = "Command1";
       tTxMsg["Code"]    = "Nak";
-      tTxMsg["Message"] = "already running";
+      tTxMsg["Info"] = "already running";
       sendMsg(tTxMsg);
       return;
    }
@@ -81,7 +81,7 @@ void ControlThread::processRxMsg_Command2(Json::Value& aRxMsg)
       tTxMsg["MsgId"] = "Completion";
       tTxMsg["Command"] = "Command2";
       tTxMsg["Code"] = "Nak";
-      tTxMsg["Message"] = "already running";
+      tTxMsg["Info"] = "already running";
       sendMsg(tTxMsg);
       return;
    }
@@ -164,7 +164,7 @@ void ControlThread::executeOnTimer(int aTimerCount)
       tTxMsg["MsgId"] = "Completion";
       tTxMsg["Command"] = "Command2";
       tTxMsg["Code"] = "Progress";
-      tTxMsg["Message"] = tString;
+      tTxMsg["Info"] = tString;
       sendMsg(tTxMsg);
 
       // Decrement the count to zero.
