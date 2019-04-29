@@ -200,20 +200,10 @@ void CmdLineExec::executeGo7(Ris::CmdLineCmd* aCmd)
    tRoot1["MsgId"] = "Test7Msg";
    tRoot1["Payload"] = "some_payload";
 
-   tString = tWriter.write(tRoot1);
    std::cout << "LINE102" << std::endl;
+   tString = tWriter.write(tRoot1);
    std::cout << tString;
-   if (tRoot1.isMember("MsgId22"))
-   {
-      std::cout << "Is member" << std::endl;
-   }
-   else
-   {
-      std::cout << "Is not member" << std::endl;
-   }
    std::cout << "LINE103" << std::endl;
-
-
 }
 
 //******************************************************************************

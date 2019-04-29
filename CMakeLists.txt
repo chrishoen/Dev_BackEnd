@@ -10,6 +10,7 @@ project ("Dev_BackEnd")
 my_init_global_import_variables()
 
 add_subdirectory ("BackEnd3")
+add_subdirectory ("Json")
 return()
 
 add_subdirectory ("BackEndDLL")
