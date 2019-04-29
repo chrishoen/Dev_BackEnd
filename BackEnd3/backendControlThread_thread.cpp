@@ -116,7 +116,7 @@ void ControlThread::executeRxString(std::string* aString)
 
    // Delete the received string.
    delete aString;
-
+   
    // Guard.
    if (tMsg.isNull() || !tMsg.isMember("MsgId"))
    {

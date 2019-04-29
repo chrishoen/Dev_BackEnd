@@ -40,22 +40,24 @@ void ControlThread::processRxMsg_Command1(Json::Value& aRxMsg)
 {
    Prn::print(Prn::View21, "ControlThread processRxMsg_Command1");
 
-   // Completion transmit message.
-   Json::Value tTxMsg;
-   tTxMsg["MsgId"] = "Completion";
-   tTxMsg["Command"] = "Command1";
-
    // Guard.
    if (mCommand1CountZero)
    {
-      tTxMsg["Code"] = "Nak";
+      // Send completion message for Nak.
+      Json::Value tTxMsg;
+      tTxMsg["MsgId"]   = "Completion";
+      tTxMsg["Command"] = "Command1";
+      tTxMsg["Code"]    = "Nak";
       tTxMsg["Message"] = "already running";
       sendMsg(tTxMsg);
       return;
    }
 
-   // Ack the command.
-   tTxMsg["Code"] = "Ack";
+   // Send completion message for Ack.
+   Json::Value tTxMsg;
+   tTxMsg["MsgId"]   = "Completion";
+   tTxMsg["Command"] = "Command1";
+   tTxMsg["Code"]    = "Ack";
    sendMsg(tTxMsg);
 
    // Execute the command.
@@ -71,26 +73,28 @@ void ControlThread::processRxMsg_Command2(Json::Value& aRxMsg)
 {
    Prn::print(Prn::View21, "ControlThread processRxMsg_Command2");
 
-   // Completion transmit message.
-   Json::Value tTxMsg;
-   tTxMsg["MsgId"] = "Completion";
-   tTxMsg["Command"] = "Command2";
-
    // Guard.
-   if (mCommand1CountZero)
+   if (mCommand2CountZero)
    {
+      // Send completion message for Nak.
+      Json::Value tTxMsg;
+      tTxMsg["MsgId"] = "Completion";
+      tTxMsg["Command"] = "Command2";
       tTxMsg["Code"] = "Nak";
       tTxMsg["Message"] = "already running";
       sendMsg(tTxMsg);
       return;
    }
 
-   // Ack the command.
+   // Send completion message for Ack.
+   Json::Value tTxMsg;
+   tTxMsg["MsgId"] = "Completion";
+   tTxMsg["Command"] = "Command2";
    tTxMsg["Code"] = "Ack";
    sendMsg(tTxMsg);
 
    // Execute the command.
-   mCommand1CountZero = 4;
+   mCommand2CountZero = 10;
 }
 
 //******************************************************************************
@@ -113,9 +117,6 @@ void ControlThread::processRxMsg_DataRequest(Json::Value& aRxMsg)
 
    // Send the messaeg.
    sendMsg(tTxMsg);
-
-   // Execute the command.
-   mCommand1CountZero = 4;
 }
 
 //******************************************************************************
@@ -135,7 +136,7 @@ void ControlThread::executeOnTimer(int aTimerCount)
    Json::Value tTxMsg;
    tTxMsg["MsgId"] = "Status";
    tTxMsg["Count"] = tString;
-   //sendMsg(tTxMsg);
+   sendMsg(tTxMsg);
 
    // Execute command1.
    if (mCommand1CountZero)
