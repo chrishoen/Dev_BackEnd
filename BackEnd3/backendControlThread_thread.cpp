@@ -93,8 +93,8 @@ void ControlThread::showThreadInfo()
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Convert the received string to a json value and call one of the 
-// message handlers. This is bound to the qcall.
+// Convert the received string to a json value and call the main message
+// handler. This is bound to the qcall.
 
 void ControlThread::executeRxString(std::string* aString)
 {
@@ -131,17 +131,17 @@ void ControlThread::executeRxString(std::string* aString)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Send a json message via the string thread.
+// Send a json message to the frontend via the child string thread.
 
 void ControlThread::sendMsg(const Json::Value& aMsg)
 {
-   // Write the message to a string.
+   // Write the json message to a string.
    Json::FastWriter tWriter;
    std::string tString;
    tWriter.omitEndingLineFeed();
    tString = tWriter.write(aMsg);
 
-   // Send the string via the string thread.
+   // Send the string via the child string thread.
    mStringThread->sendString(tString.c_str());
 }
 

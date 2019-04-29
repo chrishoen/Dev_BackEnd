@@ -23,8 +23,11 @@ namespace BackEnd
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// This thread connects to a client two udp sockets. It receives commands
-// from a client, executes them, and sends responses to the client.
+// This thread receives json formatted control messages sent by the frontend 
+// on a udp datagram socket. The messages consist of commands and requests.
+// The control messages are processed and json formatted response messages
+// are sent to the frontend on another udp datagram socket. Periodic jason
+// formatted messages are also sent to the frontend.
 // 
 // It inherits from BaseQCallThread to obtain a call queue based thread
 // functionality.
@@ -77,7 +80,7 @@ public:
    void threadExitFunction() override;
 
    // Execute periodically. This is called by the base class timer. It
-   // sends command completions.
+   // sends command completion and status messages.
    void executeOnTimer(int aTimerCount) override;
 
    // Show thread state info.
@@ -89,11 +92,11 @@ public:
    // Methods. Receive message qcall.
 
    // qcall registered to the mStringThread child thread. It is invoked when
-   // a string is received.
+   // a string is received from the frontend.
    Ris::Net::UdpStringThread::RxStringQCall mRxStringQCall;
 
-   // Convert the received string to a json value and call one of the 
-   // message handlers. This is bound to the qcall.
+   // Convert the received string to a json value and call the main message
+   // handler. This is bound to the qcall.
    void executeRxString(std::string* aString);
 
    //***************************************************************************
@@ -102,7 +105,7 @@ public:
    // Methods. Message handlers. These process received json messages and
    // transmit json response messages.
 
-   // Main message handler.
+   // Main message handler. This calls one of the specific message handlers.
    void processRxMsg(Json::Value& aMsg);
 
    // Specific message handlers.
@@ -115,7 +118,7 @@ public:
    //***************************************************************************
    // Methods.
 
-   // Send a json message via the string thread.
+   // Send a json message to the frontend via the child string thread.
    void sendMsg(const Json::Value& aMsg);
 };
 

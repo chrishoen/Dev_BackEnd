@@ -15,7 +15,7 @@ namespace BackEnd
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Main message handler.
+// Main message handler. This calls one of the specific message handlers.
 
 void ControlThread::processRxMsg(Json::Value& aMsg)
 {
@@ -106,7 +106,7 @@ void ControlThread::processRxMsg_DataRequest(Json::Value& aRxMsg)
 {
    Prn::print(Prn::View21, "ControlThread processRxMsg_DataRequest");
 
-   // Data response transmit message.
+   // Compose data response transmit message.
    Json::Value tTxMsg;
    tTxMsg["MsgId"] = "DataResponse";
    tTxMsg["DataType"] = "DataAmber";
@@ -115,7 +115,7 @@ void ControlThread::processRxMsg_DataRequest(Json::Value& aRxMsg)
    tTxMsg["Item2"] = "some_item2";
    tTxMsg["Item3"] = "some_item3";
 
-   // Send the messaeg.
+   // Send the message.
    sendMsg(tTxMsg);
 }
 
