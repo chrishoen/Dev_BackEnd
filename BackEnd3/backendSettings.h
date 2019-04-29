@@ -68,14 +68,10 @@ public:
    //***************************************************************************
    // Members.
 
-   // Thread enable flags.
-   bool mCommandEnable;
-   bool mStatusEnable;
-
-   TS::PrintLevel mCommandPrintLevel;
-   TS::PrintLevel mCommandUdpPrintLevel;
-   TS::PrintLevel mStatusPrintLevel;
-   TS::PrintLevel mStatusUdpPrintLevel;
+   TS::PrintLevel mControlPrintLevel;
+   TS::PrintLevel mControlUdpPrintLevel;
+   TS::PrintLevel mIsochPrintLevel;
+   TS::PrintLevel mIsochUdpPrintLevel;
 
    // Udp ip addresses and receive ports.
    char mFrontEndIpAddress[cMaxStringSize];

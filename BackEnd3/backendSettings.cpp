@@ -58,10 +58,10 @@ void Settings::show()
    printf("FrontEndIsochPort          %-10d\n", mFrontEndIsochPort);
 
    printf("\n");
-   printf("CommandPrintLevel          %-10s\n", mCommandPrintLevel.asString(tBuffer));
-   printf("CommandUdpPrintLevel       %-10s\n", mCommandUdpPrintLevel.asString(tBuffer));
-   printf("StatusPrintLevel           %-10s\n", mStatusPrintLevel.asString(tBuffer));
-   printf("StatusUdpPrintLevel        %-10s\n", mStatusUdpPrintLevel.asString(tBuffer));
+   printf("ControlPrintLevel          %-10s\n", mControlPrintLevel.asString(tBuffer));
+   printf("ControlUdpPrintLevel       %-10s\n", mControlUdpPrintLevel.asString(tBuffer));
+   printf("IsochPrintLevel            %-10s\n", mIsochPrintLevel.asString(tBuffer));
+   printf("IsochUdpPrintLevel         %-10s\n", mIsochUdpPrintLevel.asString(tBuffer));
 
 }
 
@@ -81,10 +81,10 @@ void Settings::execute(Ris::CmdLineCmd* aCmd)
    if (aCmd->isCmd("FrontEndControlPort"))      mFrontEndControlPort = aCmd->argInt(1);
    if (aCmd->isCmd("FrontEndIsochPort"))        mFrontEndIsochPort = aCmd->argInt(1);
 
-   if (aCmd->isCmd("CommandPrintLevel"))        mCommandPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("CommandUdpPrintLevel"))     mCommandUdpPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("StatusPrintLevel"))         mStatusPrintLevel.readArgs(aCmd);
-   if (aCmd->isCmd("StatusUdpPrintLevel"))      mStatusUdpPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("ControlPrintLevel"))        mControlPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("ControlUdpPrintLevel"))     mControlUdpPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("IsochPrintLevel"))          mIsochPrintLevel.readArgs(aCmd);
+   if (aCmd->isCmd("IsochUdpPrintLevel"))       mIsochUdpPrintLevel.readArgs(aCmd);
 }
 
 //******************************************************************************

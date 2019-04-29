@@ -26,7 +26,7 @@ ControlThread::ControlThread()
    // Set base class thread variables.
    BaseClass::setThreadName("Command");
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mNormal);
-   BaseClass::setThreadPrintLevel(gSettings.mStatusPrintLevel);
+   BaseClass::setThreadPrintLevel(gSettings.mIsochPrintLevel);
    BaseClass::mTimerPeriod = 1000;
 
    // Bind qcalls.
@@ -56,7 +56,7 @@ void ControlThread::threadInitFunction()
 
    tSettings.setLocalIp("0.0.0.0", gSettings.mBackEndControlPort);
    tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mFrontEndControlPort);
-   tSettings.mPrintLevel = gSettings.mCommandUdpPrintLevel;
+   tSettings.mPrintLevel = gSettings.mControlUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
    tSettings.mRxStringQCall = mRxStringQCall;
 

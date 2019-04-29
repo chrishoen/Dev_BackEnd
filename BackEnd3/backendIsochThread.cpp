@@ -25,7 +25,7 @@ IsochThread::IsochThread()
    // Set base class thread variables.
    BaseClass::setThreadName("Isoch");
    BaseClass::setThreadPriority(Ris::Threads::gPriorities.mNormal);
-   BaseClass::setThreadPrintLevel(gSettings.mStatusPrintLevel);
+   BaseClass::setThreadPrintLevel(gSettings.mIsochPrintLevel);
    BaseClass::mTimerPeriod = 1000;
 
    // Initialize variables.
@@ -50,7 +50,7 @@ void IsochThread::threadInitFunction()
    Ris::Net::Settings tSettings;
 
    tSettings.setRemoteIp(gSettings.mFrontEndIpAddress, gSettings.mFrontEndIsochPort);
-   tSettings.mPrintLevel = gSettings.mStatusUdpPrintLevel;
+   tSettings.mPrintLevel = gSettings.mIsochUdpPrintLevel;
    tSettings.mThreadPriority = Ris::Threads::gPriorities.mUdp;
 
    // Create the child thread with the settings.
