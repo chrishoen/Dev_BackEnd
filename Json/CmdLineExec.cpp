@@ -141,8 +141,6 @@ void CmdLineExec::executeGo5(Ris::CmdLineCmd* aCmd)
    tRoot1["msg-id"] = "test4_msg";
    tRoot1["payload"] = "some_payload";
 
-   tRoot1.
-
    std::cout << "LINE102" << std::endl;
    tStream1 << tRoot1 << std::endl;
    tString = tStream1.str();
@@ -212,6 +210,30 @@ void CmdLineExec::executeGo7(Ris::CmdLineCmd* aCmd)
 
 void CmdLineExec::executeGo8(Ris::CmdLineCmd* aCmd)
 {
+   std::string tString;
+   Json::Value tRoot;
+   Json::FastWriter tWriter;
+
+   std::vector<std::string> tList;
+   tList.push_back("item0");
+   tList.push_back("item1");
+   tList.push_back("item2");
+   tList.push_back("item3");
+
+   Json::Value tArray;
+   for (auto it = tList.begin(); it != tList.end(); ++it)
+   {
+      tArray.append(*it);
+   }
+
+   std::cout << "LINE101" << std::endl;
+   tRoot["MsgId"] = "Test8Msg";
+   tRoot["List"] = tArray;
+
+   std::cout << "LINE102" << std::endl;
+   tString = tWriter.write(tRoot);
+   std::cout << tString;
+   std::cout << "LINE103" << std::endl;
 }
 
 //******************************************************************************
